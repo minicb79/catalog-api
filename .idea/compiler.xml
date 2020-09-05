@@ -10,6 +10,13 @@
         </processorPath>
         <module name="catalog-api.main" />
       </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.3.3.RELEASE/f8b44f9409b969d4320ce1caff727bd5b85e513e/spring-boot-configuration-processor-2.3.3.RELEASE.jar" />
+        </processorPath>
+        <module name="catalog-api.modules.libraries-api.main" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
   </component>
