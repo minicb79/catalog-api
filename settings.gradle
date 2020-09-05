@@ -1,1 +1,1 @@
-include 'libraries-api-module'
+include 'modules:libraries-api-module'
