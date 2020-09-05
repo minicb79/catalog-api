@@ -53,7 +53,7 @@ subprojects {
 }
 
 dependencies {
-    implementation project(':modules:libraries-api-module')
+    implementation project(':modules:libraries-api')
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
