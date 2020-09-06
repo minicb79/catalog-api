@@ -32,9 +32,9 @@ public class LibraryDao {
 
   public static LibraryDao from(LibraryDomain domain) {
     LibraryDao dao = new LibraryDao();
-    domain.setId(domain.getId());
-    domain.setName(domain.getName());
-    domain.setDescription(domain.getDescription());
+    dao.setId(domain.getId());
+    dao.setName(domain.getName());
+    dao.setDescription(domain.getDescription());
     return dao;
   }
 }

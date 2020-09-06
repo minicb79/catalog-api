@@ -1,0 +1,2 @@
+com/minicdesign/catalog/api/libraries/services/CreateLibraryServiceTest.java
+ com.minicdesign.catalog.api.libraries.services.CreateLibraryServiceTest

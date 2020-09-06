@@ -14,6 +14,11 @@ public class CreateLibraryService implements CreateLibraryUseCase {
 
   @Override
   public LibraryDomain createLibrary(LibraryDomain library) {
+
+    if (library == null) {
+      throw new IllegalArgumentException("LibraryDomain must not be null when creating a Library.");
+    }
+
     return repository.createLibrary(library);
   }
 
