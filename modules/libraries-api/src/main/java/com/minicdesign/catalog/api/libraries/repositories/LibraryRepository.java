@@ -13,6 +13,11 @@ public class LibraryRepository {
   private final LibraryJpaRepository jpaRepository;
 
   public LibraryDomain createLibrary(LibraryDomain domain) {
+
+    if (domain == null) {
+      throw new IllegalArgumentException("LibraryDomain must not be null when creating a Library.");
+    }
+
     LibraryDao libraryDao = jpaRepository.save(LibraryDao.from(domain));
     return LibraryDomain.from(libraryDao);
   }
