@@ -2,8 +2,7 @@ package com.minicdesign.catalog.api.integrationTests;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minicdesign.catalog.api.integrationTests.controllers.domain.request.LibraryDetailsRequest;
@@ -42,9 +41,9 @@ public class LibraryControllerIntegrationTest {
         .content(objectMapper.writeValueAsString(library)))
         .andDo(print())
         .andExpect(status().isCreated())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1L))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Library Name"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("Library Description"));
+        .andExpect(jsonPath("$.id").value(3L))
+        .andExpect(jsonPath("$.name").value("Library Name"))
+        .andExpect(jsonPath("$.description").value("Library Description"));
   }
 
   @Test
@@ -57,7 +56,28 @@ public class LibraryControllerIntegrationTest {
         .content(objectMapper.writeValueAsString(library)))
         .andDo(print())
         .andExpect(status().isBadRequest())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.errorCode").value("VE-001"))
+        .andExpect(jsonPath("$.validationErrors").exists())
+        .andExpect(jsonPath("$.validationErrors").isMap())
+        .andExpect(jsonPath("$.validationErrors").isNotEmpty());
+  }
+
+  @Test
+  public void testNullNameWhenCreateLibrary() throws Exception {
+    LibraryDetailsRequest library = new LibraryDetailsRequest();
+    library.setDescription("A description for the library.");
+
+    mockMvc.perform(post("/libraries")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(library)))
+        .andDo(print())
+        .andExpect(status().isBadRequest())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.errorCode").value("VE-001"))
+        .andExpect(jsonPath("$.validationErrors").exists())
+        .andExpect(jsonPath("$.validationErrors").isMap())
+        .andExpect(jsonPath("$.validationErrors").isNotEmpty());
   }
 
 }

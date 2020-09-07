@@ -18,8 +18,8 @@ public class LibraryRepository {
       throw new IllegalArgumentException("LibraryDomain must not be null when creating a Library.");
     }
 
-    LibraryDao libraryDao = jpaRepository.save(LibraryDao.from(domain));
-    return LibraryDomain.from(libraryDao);
+    LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
+    return LibraryDaoMapper.daoToDomain(libraryDao);
   }
 
 }

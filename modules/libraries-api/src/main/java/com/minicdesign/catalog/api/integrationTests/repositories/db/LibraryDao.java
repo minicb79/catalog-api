@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,17 +23,4 @@ public class LibraryDao {
 
   @Column(length = 160)
   private String description;
-
-  public LibraryDao(String name, String description) {
-    this.name = name;
-    this.description = description;
-  }
-
-  public static LibraryDao from(LibraryDomain domain) {
-    LibraryDao dao = new LibraryDao();
-    dao.setId(domain.getId());
-    dao.setName(domain.getName());
-    dao.setDescription(domain.getDescription());
-    return dao;
-  }
 }
