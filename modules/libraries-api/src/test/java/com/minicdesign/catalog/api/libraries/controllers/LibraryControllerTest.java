@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.controllers;
+package com.minicdesign.catalog.api.libraries.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,14 +9,14 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.request.LibraryDetailsRequest;
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.LibraryDetailsResponse;
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.PagedLibraryDetailsListResponse;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryCountUseCase;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryUseCase;
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.services.CreateLibraryService;
+import com.minicdesign.catalog.api.libraries.controllers.domain.request.LibraryDetailsRequest;
+import com.minicdesign.catalog.api.libraries.controllers.domain.response.LibraryDetailsResponse;
+import com.minicdesign.catalog.api.libraries.controllers.domain.response.PagedLibraryDetailsListResponse;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryCountUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryListUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryUseCase;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.services.CreateLibraryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

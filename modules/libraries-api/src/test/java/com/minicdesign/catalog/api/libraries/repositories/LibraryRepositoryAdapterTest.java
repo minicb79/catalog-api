@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.repositories;
+package com.minicdesign.catalog.api.libraries.repositories;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -8,9 +8,9 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 
 import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

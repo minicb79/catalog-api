@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.controllers.usecases;
+package com.minicdesign.catalog.api.libraries.controllers.usecases;
 
 import org.springframework.stereotype.Service;
 

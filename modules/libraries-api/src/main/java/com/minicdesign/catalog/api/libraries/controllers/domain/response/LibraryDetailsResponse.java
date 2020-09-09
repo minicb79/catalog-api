@@ -1,7 +1,7 @@
-package com.minicdesign.catalog.api.integrationTests.controllers.domain.response;
+package com.minicdesign.catalog.api.libraries.controllers.domain.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package com.minicdesign.catalog.api.integrationTests.domain;
+package com.minicdesign.catalog.api.libraries.domain;
 
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.request.LibraryDetailsRequest;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
+import com.minicdesign.catalog.api.libraries.controllers.domain.request.LibraryDetailsRequest;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

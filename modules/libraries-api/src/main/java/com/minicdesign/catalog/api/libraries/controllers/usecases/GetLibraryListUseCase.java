@@ -1,6 +1,6 @@
-package com.minicdesign.catalog.api.integrationTests.controllers.usecases;
+package com.minicdesign.catalog.api.libraries.controllers.usecases;
 
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 

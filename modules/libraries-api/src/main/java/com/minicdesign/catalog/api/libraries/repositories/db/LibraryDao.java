@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.repositories.db;
+package com.minicdesign.catalog.api.libraries.repositories.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

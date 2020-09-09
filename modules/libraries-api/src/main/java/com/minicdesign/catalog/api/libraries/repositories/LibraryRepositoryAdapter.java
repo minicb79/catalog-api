@@ -1,12 +1,12 @@
-package com.minicdesign.catalog.api.integrationTests.repositories;
+package com.minicdesign.catalog.api.libraries.repositories;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

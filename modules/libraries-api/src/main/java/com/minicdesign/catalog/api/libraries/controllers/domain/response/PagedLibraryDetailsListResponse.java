@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.controllers.domain.response;
+package com.minicdesign.catalog.api.libraries.controllers.domain.response;
 
 import java.util.List;
 

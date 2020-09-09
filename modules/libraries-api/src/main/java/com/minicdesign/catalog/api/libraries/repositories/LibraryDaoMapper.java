@@ -1,7 +1,7 @@
-package com.minicdesign.catalog.api.integrationTests.repositories;
+package com.minicdesign.catalog.api.libraries.repositories;
 
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import org.springframework.stereotype.Component;
 
 @Component

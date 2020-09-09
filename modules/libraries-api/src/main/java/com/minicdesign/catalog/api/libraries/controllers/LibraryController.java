@@ -1,17 +1,17 @@
-package com.minicdesign.catalog.api.integrationTests.controllers;
+package com.minicdesign.catalog.api.libraries.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.request.LibraryDetailsRequest;
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.LibraryDetailsResponse;
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.PagedLibraryDetailsListResponse;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.CreateLibraryUseCase;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryCountUseCase;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
-import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryUseCase;
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.controllers.domain.request.LibraryDetailsRequest;
+import com.minicdesign.catalog.api.libraries.controllers.domain.response.LibraryDetailsResponse;
+import com.minicdesign.catalog.api.libraries.controllers.domain.response.PagedLibraryDetailsListResponse;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.CreateLibraryUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryCountUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryListUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryUseCase;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

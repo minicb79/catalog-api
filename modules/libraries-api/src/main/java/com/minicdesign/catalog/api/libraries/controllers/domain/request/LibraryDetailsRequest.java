@@ -1,4 +1,4 @@
-package com.minicdesign.catalog.api.integrationTests.controllers.domain.request;
+package com.minicdesign.catalog.api.libraries.controllers.domain.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

@@ -1,12 +1,12 @@
-package com.minicdesign.catalog.api.integrationTests.services;
+package com.minicdesign.catalog.api.libraries.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepositoryAdapter;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.repositories.LibraryRepositoryAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
