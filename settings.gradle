@@ -1,5 +1,4 @@
 include 'modules:libraries-api'
-include 'common'
 include 'modules:common'
 findProject(':modules:common')?.name = 'common'
 findProject(':modules:libraries-api')?.name = 'libraries-api'

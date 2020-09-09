@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.minicdesign.catalog.api.integrationTests.controllers.domain.request.LibraryDetailsRequest;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
+import com.minicdesign.catalog.api.libraries.controllers.domain.request.LibraryDetailsRequest;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -111,5 +111,24 @@ public class LibraryControllerIntegrationTest {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.libraryList").isEmpty());
+  }
+
+  @Test
+  public void testRequestLibraryDetails() throws Exception {
+    mockMvc.perform(get("/libraries/4"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.id").value(4L))
+        .andExpect(jsonPath("$.name").value("Library 4"))
+        .andExpect(jsonPath("$.description").value("Library Description 4"));
+  }
+
+  @Test
+  public void testRequestInvalidLibraryDetails() throws Exception {
+    mockMvc.perform(get("/libraries/199"))
+        .andDo(print())
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.errorCode").value("NF-404"));
   }
 }

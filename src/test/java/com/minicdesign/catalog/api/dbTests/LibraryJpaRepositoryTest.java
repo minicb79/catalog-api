@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
-import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,7 +26,7 @@ public class LibraryJpaRepositoryTest {
   @Test
   public void testDbAccess() {
     List<LibraryDao> libraryList = repo.findAll();
-    assertEquals(2, libraryList.size());
+    assertEquals(14, libraryList.size());
   }
 
   @Test
