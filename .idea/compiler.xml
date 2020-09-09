@@ -10,6 +10,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
         </processorPath>
         <module name="catalog-api.main" />
+        <module name="catalog-api.modules.common.main" />
         <module name="catalog-api.modules.libraries-api.main" />
       </profile>
     </annotationProcessing>
