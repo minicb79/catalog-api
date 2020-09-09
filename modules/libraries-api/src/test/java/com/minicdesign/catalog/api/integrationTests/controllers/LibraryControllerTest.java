@@ -75,7 +75,7 @@ public class LibraryControllerTest {
     libraryDomainList.add(new LibraryDomain(5L, "Library 5", null));
     libraryDomainList.add(new LibraryDomain(6L, "Library 6", "Quite a long description for this test."));
 
-    Page<LibraryDomain> domainPage = new PageImpl(libraryDomainList, PageRequest.of(0, 6), 15);
+    Page<LibraryDomain> domainPage = new PageImpl<>(libraryDomainList, PageRequest.of(0, 6), 15);
 
     when(getLibraryListService.getLibraryList(anyInt(), anyInt())).thenReturn(domainPage);
 
