@@ -1,5 +1,6 @@
 package com.minicdesign.catalog.api.integrationTests;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,7 +41,7 @@ public class LibraryControllerIntegrationTest {
         .content(objectMapper.writeValueAsString(library)))
         .andDo(print())
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id").value(3L))
+        .andExpect(jsonPath("$.id").value(15L))
         .andExpect(jsonPath("$.name").value("Library Name"))
         .andExpect(jsonPath("$.description").value("Library Description"));
   }
@@ -79,4 +80,36 @@ public class LibraryControllerIntegrationTest {
         .andExpect(jsonPath("$.validationErrors").isNotEmpty());
   }
 
+  @Test
+  public void testGetDefaultPagedLibraryList() throws Exception {
+    mockMvc.perform(get("/libraries"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.libraryList").isArray())
+        .andExpect(jsonPath("$.libraryList.length()").value(6))
+        .andExpect(jsonPath("$.libraryList[4].name").value("Library 5"))
+        .andExpect(jsonPath("$.page").value(0))
+        .andExpect(jsonPath("$.count").value(15))
+        .andExpect(jsonPath("$.pageCount").value(3));
+  }
+
+  @Test
+  public void testGetThirdPageLibraryList() throws Exception {
+    mockMvc.perform(get("/libraries?page=2"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.libraryList").isArray())
+        .andExpect(jsonPath("$.libraryList.length()").value(2))
+        .andExpect(jsonPath("$.libraryList[1].name").value("Library 14"));
+  }
+
+  @Test
+  public void testRequestInvalidPage() throws Exception {
+    mockMvc.perform(get("/libraries?page=5"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.libraryList").isEmpty());
+  }
 }

@@ -52,8 +52,10 @@ public class LibraryController {
 
     return new PagedLibraryDetailsListResponse(
         libraryDomainList,
-        page,
+        libraryDomainPage.getNumber(),
         libraryDomainPage.getTotalElements(),
-        libraryDomainPage.getTotalPages());
+        libraryDomainPage.getTotalPages(),
+        libraryDomainPage.previousOrFirstPageable(),
+        libraryDomainPage.nextOrLastPageable());
   }
 }

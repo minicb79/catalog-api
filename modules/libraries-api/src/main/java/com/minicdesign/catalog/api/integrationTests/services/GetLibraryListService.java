@@ -1,13 +1,10 @@
 package com.minicdesign.catalog.api.integrationTests.services;
 
-import java.util.stream.Collectors;
-
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,2 +1,14 @@
 INSERT INTO `library`(`name`, `description`) VALUES ('Library 1', 'Library Description 1');
 INSERT INTO `library`(`name`, `description`) VALUES ('Library 2', 'Library Description 2');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 3', 'Library Description 3');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 4', 'Library Description 4');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 5', 'Library Description 5');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 6', 'Library Description 6');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 7', 'Library Description 7');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 8', 'Library Description 8');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 9', 'Library Description 9');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 10', 'Library Description 10');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 11', 'Library Description 11');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 12', 'Library Description 12');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 13', 'Library Description 13');
+INSERT INTO `library`(`name`, `description`) VALUES ('Library 14', 'Library Description 14');

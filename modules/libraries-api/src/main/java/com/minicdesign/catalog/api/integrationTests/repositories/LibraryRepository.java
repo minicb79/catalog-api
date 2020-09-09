@@ -29,9 +29,13 @@ public class LibraryRepository {
 
   public Page<LibraryDomain> getLibrariesForPage(int page, int size) {
     Page<LibraryDao> daoPage = jpaRepository.findAll(PageRequest.of(page, size));
-    Page<LibraryDomain> domainPage = new PageImpl<>(daoPage.getContent().stream().map(LibraryDomain::from).collect(Collectors.toList()));
 
-    return domainPage;
+    return new PageImpl<>(
+        daoPage.getContent().stream()
+            .map(LibraryDomain::from)
+            .collect(Collectors.toList()),
+        daoPage.getPageable(),
+        daoPage.getTotalElements());
   }
 
   public long getCount() {
