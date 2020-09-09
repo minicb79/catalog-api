@@ -112,4 +112,23 @@ public class LibraryControllerIntegrationTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.libraryList").isEmpty());
   }
+
+  @Test
+  public void testRequestLibraryDetails() throws Exception {
+    mockMvc.perform(get("/libraries/4"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.id").value(4L))
+        .andExpect(jsonPath("$.name").value("Library 4"))
+        .andExpect(jsonPath("$.description").value("Library Description 4"));
+  }
+
+  @Test
+  public void testRequestInvalidLibraryDetails() throws Exception {
+    mockMvc.perform(get("/libraries/199"))
+        .andDo(print())
+        .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.errorCode").value("NF-404"));
+  }
 }

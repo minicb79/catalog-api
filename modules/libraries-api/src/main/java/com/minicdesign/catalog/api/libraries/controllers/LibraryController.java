@@ -10,11 +10,13 @@ import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.CreateLibraryUseCase;
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryCountUseCase;
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
+import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryUseCase;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ public class LibraryController {
 
   private final CreateLibraryUseCase createLibraryService;
   private final GetLibraryListUseCase getLibraryListService;
+  private final GetLibraryUseCase getLibraryService;
   private final GetLibraryCountUseCase libraryCountService;
 
   @PostMapping("/libraries")
@@ -57,5 +60,12 @@ public class LibraryController {
         libraryDomainPage.getTotalPages(),
         libraryDomainPage.previousOrFirstPageable(),
         libraryDomainPage.nextOrLastPageable());
+  }
+
+  @GetMapping("/libraries/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody LibraryDetailsResponse getLibrary(@PathVariable("id") Long id) {
+    LibraryDomain domain = getLibraryService.getLibrary(id);
+    return LibraryDetailsResponse.from(domain);
   }
 }

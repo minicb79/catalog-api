@@ -14,6 +14,7 @@ import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.
 import com.minicdesign.catalog.api.integrationTests.controllers.domain.response.PagedLibraryDetailsListResponse;
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryCountUseCase;
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
+import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryUseCase;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import com.minicdesign.catalog.api.integrationTests.services.CreateLibraryService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,13 +36,16 @@ public class LibraryControllerTest {
   private GetLibraryListUseCase getLibraryListService;
 
   @Mock
+  private GetLibraryUseCase getLibraryUseCase;
+
+  @Mock
   private GetLibraryCountUseCase getLibraryCountUseCase;
 
   private LibraryController controller;
 
   @BeforeEach
   public void setup() {
-    controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryCountUseCase);
+    controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryUseCase, getLibraryCountUseCase);
   }
 
   @Test
