@@ -2,8 +2,12 @@ package com.minicdesign.catalog.api.integrationTests.repositories;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
+import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
 import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
@@ -53,6 +57,32 @@ public class LibraryRepositoryTest {
 
     assertThrows(IllegalArgumentException.class, () -> {
       repository.createLibrary(null);
+    });
+  }
+
+  @Test
+  void givenKnownLibraryId_whenGetLibrary_thenLibraryDaoReturned() {
+
+    LibraryDao savedDao = new LibraryDao();
+    savedDao.setId(1L);
+    savedDao.setName("Library Name");
+    savedDao.setDescription("Library Description");
+
+    when(jpaRepository.findById(anyLong())).thenReturn(Optional.of(savedDao));
+
+    LibraryDomain responseDomain = repository.getLibrary(1L);
+
+    assertNotNull(responseDomain);
+    assertEquals(1L, savedDao.getId());
+    assertEquals("Library Name", savedDao.getName());
+    assertEquals("Library Description", savedDao.getDescription());
+  }
+
+  @Test
+  void givenUnknownLibraryId_whenGetLibrary_thenItemNotFoundExceptionThrown() {
+
+    assertThrows(ItemNotFoundException.class, () -> {
+      repository.getLibrary(100L);
     });
   }
 

@@ -1,7 +1,9 @@
 package com.minicdesign.catalog.api.integrationTests.repositories;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
 import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryDao;
 import com.minicdesign.catalog.api.integrationTests.repositories.db.LibraryJpaRepository;
@@ -36,6 +38,16 @@ public class LibraryRepository {
             .collect(Collectors.toList()),
         daoPage.getPageable(),
         daoPage.getTotalElements());
+  }
+
+  public LibraryDomain getLibrary(long id) {
+    Optional<LibraryDao> dao = jpaRepository.findById(id);
+
+    if (dao.isEmpty()) {
+      throw new ItemNotFoundException(String.format("Library with id %d could not be found.", id));
+    } else {
+      return LibraryDaoMapper.daoToDomain(dao.get());
+    }
   }
 
   public long getCount() {
