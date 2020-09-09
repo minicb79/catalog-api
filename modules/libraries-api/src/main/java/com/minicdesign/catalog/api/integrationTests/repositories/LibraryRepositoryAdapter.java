@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class LibraryRepository {
+public class LibraryRepositoryAdapter {
 
   private final LibraryJpaRepository jpaRepository;
 

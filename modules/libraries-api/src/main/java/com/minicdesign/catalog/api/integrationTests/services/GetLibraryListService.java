@@ -2,7 +2,7 @@ package com.minicdesign.catalog.api.integrationTests.services;
 
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.GetLibraryListUseCase;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepository;
+import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetLibraryListService implements GetLibraryListUseCase {
 
-  private final LibraryRepository libraryRepository;
+  private final LibraryRepositoryAdapter libraryRepository;
 
   @Override
   public Page<LibraryDomain> getLibraryList(int page, int size) {

@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepository;
+import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepositoryAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class CreateLibraryServiceTest {
 
   @Mock
-  LibraryRepository repository;
+  LibraryRepositoryAdapter repository;
 
   CreateLibraryService service;
 

@@ -2,7 +2,7 @@ package com.minicdesign.catalog.api.integrationTests.services;
 
 import com.minicdesign.catalog.api.integrationTests.controllers.usecases.CreateLibraryUseCase;
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepository;
+import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepositoryAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CreateLibraryService implements CreateLibraryUseCase {
 
-  private final LibraryRepository repository;
+  private final LibraryRepositoryAdapter repository;
 
   @Override
   public LibraryDomain createLibrary(LibraryDomain library) {

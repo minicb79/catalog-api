@@ -18,16 +18,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class LibraryRepositoryTest {
+public class LibraryRepositoryAdapterTest {
 
   @Mock
   private LibraryJpaRepository jpaRepository;
 
-  private LibraryRepository repository;
+  private LibraryRepositoryAdapter repository;
 
   @BeforeEach
   void setup() {
-    repository = new LibraryRepository(jpaRepository);
+    repository = new LibraryRepositoryAdapter(jpaRepository);
   }
 
   @Test

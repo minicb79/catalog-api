@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.minicdesign.catalog.api.integrationTests.domain.LibraryDomain;
-import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepository;
+import com.minicdesign.catalog.api.integrationTests.repositories.LibraryRepositoryAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ import org.springframework.data.domain.Sort;
 public class GetLibraryListServiceTest {
 
   @Mock
-  private LibraryRepository repository;
+  private LibraryRepositoryAdapter repository;
 
   private GetLibraryListService service;
 
