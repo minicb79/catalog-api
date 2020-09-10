@@ -11,6 +11,7 @@ import com.minicdesign.catalog.api.libraries.controllers.usecases.CreateLibraryU
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryCountUseCase;
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryListUseCase;
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.UpdateLibraryUseCase;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,7 @@ public class LibraryController {
   private final CreateLibraryUseCase createLibraryService;
   private final GetLibraryListUseCase getLibraryListService;
   private final GetLibraryUseCase getLibraryService;
+  private final UpdateLibraryUseCase updateLibraryService;
   private final GetLibraryCountUseCase libraryCountService;
 
   @PostMapping("/libraries")
@@ -66,6 +69,13 @@ public class LibraryController {
   @ResponseStatus(HttpStatus.OK)
   public @ResponseBody LibraryDetailsResponse getLibrary(@PathVariable("id") Long id) {
     LibraryDomain domain = getLibraryService.getLibrary(id);
+    return LibraryDetailsResponse.from(domain);
+  }
+
+  @PutMapping("/libraries/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody LibraryDetailsResponse updateLibrary(@PathVariable("id") Long id, @RequestBody LibraryDetailsRequest request) {
+    LibraryDomain domain = updateLibraryService.updateLibrary(LibraryDomain.from(request, id));
     return LibraryDetailsResponse.from(domain);
   }
 }

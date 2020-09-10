@@ -41,4 +41,10 @@ public class LibraryJpaRepositoryTest {
     assertEquals(savedDao.getId(), library.getId());
   }
 
+  @Test
+  public void testLibraryCountById() {
+    int count = repo.countById(3L);
+    assertEquals(1, count);
+  }
+
 }

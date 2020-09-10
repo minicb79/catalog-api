@@ -1,24 +1,26 @@
 package com.minicdesign.catalog.api.integrationTests;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minicdesign.catalog.api.libraries.controllers.domain.request.LibraryDetailsRequest;
-import com.minicdesign.catalog.api.libraries.repositories.db.LibraryJpaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class LibraryControllerIntegrationTest {
 
   @Autowired
@@ -27,8 +29,10 @@ public class LibraryControllerIntegrationTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-  @Autowired
-  private LibraryJpaRepository jpaRepository;
+  @BeforeEach
+  public void resetDB() {
+
+  }
 
   @Test
   public void testCreateLibrary() throws Exception {
@@ -90,7 +94,7 @@ public class LibraryControllerIntegrationTest {
         .andExpect(jsonPath("$.libraryList.length()").value(6))
         .andExpect(jsonPath("$.libraryList[4].name").value("Library 5"))
         .andExpect(jsonPath("$.page").value(0))
-        .andExpect(jsonPath("$.count").value(15))
+        .andExpect(jsonPath("$.count").value(14))
         .andExpect(jsonPath("$.pageCount").value(3));
   }
 
@@ -130,5 +134,22 @@ public class LibraryControllerIntegrationTest {
         .andDo(print())
         .andExpect(status().isNotFound())
         .andExpect(jsonPath("$.errorCode").value("NF-404"));
+  }
+
+  @Test
+  public void testUpdateLibraryDetails() throws Exception {
+
+    LibraryDetailsRequest library = new LibraryDetailsRequest();
+    library.setName("Library 5.1");
+    library.setDescription("Library Description 5.1");
+
+    mockMvc.perform(put("/libraries/5")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(library)))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.name").value("Library 5.1"))
+        .andExpect(jsonPath("$.description").value("Library Description 5.1"));
   }
 }

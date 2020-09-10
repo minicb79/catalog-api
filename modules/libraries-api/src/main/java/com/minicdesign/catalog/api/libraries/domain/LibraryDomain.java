@@ -22,6 +22,12 @@ public class LibraryDomain {
     return domain;
   }
 
+  public static LibraryDomain from(LibraryDetailsRequest request, Long id) {
+    LibraryDomain domain = from(request);
+    domain.setId(id);
+    return domain;
+  }
+
   public static LibraryDomain from(LibraryDao dao) {
     LibraryDomain domain = new LibraryDomain();
     domain.setId(dao.getId());

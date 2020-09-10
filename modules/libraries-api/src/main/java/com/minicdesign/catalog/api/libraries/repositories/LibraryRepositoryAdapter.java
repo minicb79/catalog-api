@@ -45,9 +45,24 @@ public class LibraryRepositoryAdapter {
 
     if (dao.isEmpty()) {
       throw new ItemNotFoundException(String.format("Library with id %d could not be found.", id));
-    } else {
-      return LibraryDaoMapper.daoToDomain(dao.get());
     }
+
+    return LibraryDaoMapper.daoToDomain(dao.get());
+  }
+
+  public LibraryDomain updateLibrary(LibraryDomain domain) {
+    if (domain == null) {
+      throw new IllegalArgumentException("LibraryDomain must not be null when updating a Library.");
+    }
+
+    int daoCount = jpaRepository.countById(domain.getId());
+
+    if (daoCount == 0) {
+      throw new ItemNotFoundException(String.format("Library with id %d could not be found.", domain.getId()));
+    }
+
+    LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
+    return LibraryDaoMapper.daoToDomain(libraryDao);
   }
 
   public long getCount() {

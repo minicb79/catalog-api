@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LibraryJpaRepository extends JpaRepository<LibraryDao, Long> {
+
+  int countById(Long id);
 }
