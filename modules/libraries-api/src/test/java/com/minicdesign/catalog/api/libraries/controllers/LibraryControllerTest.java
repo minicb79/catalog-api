@@ -15,6 +15,7 @@ import com.minicdesign.catalog.api.libraries.controllers.domain.response.PagedLi
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryCountUseCase;
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryListUseCase;
 import com.minicdesign.catalog.api.libraries.controllers.usecases.GetLibraryUseCase;
+import com.minicdesign.catalog.api.libraries.controllers.usecases.UpdateLibraryUseCase;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.services.CreateLibraryService;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,13 +40,16 @@ public class LibraryControllerTest {
   private GetLibraryUseCase getLibraryUseCase;
 
   @Mock
+  private UpdateLibraryUseCase updateLibraryUseCase;
+
+  @Mock
   private GetLibraryCountUseCase getLibraryCountUseCase;
 
   private LibraryController controller;
 
   @BeforeEach
   public void setup() {
-    controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryUseCase, getLibraryCountUseCase);
+    controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryUseCase, updateLibraryUseCase, getLibraryCountUseCase);
   }
 
   @Test

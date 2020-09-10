@@ -3,12 +3,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    implementation "org.jetbrains.kotlin:kotlin-maven-allopen:$kotlinVersion"
-
     implementation project(':modules:common')
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-    kapt "org.springframework.boot:spring-boot-configuration-processor"
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"

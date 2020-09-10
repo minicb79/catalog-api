@@ -1,7 +1,6 @@
 buildscript {
     ext {
         apiVersion = '0.0.1-SNAPSHOT'
-        kotlinVersion = '1.4.0'
         lombokVersion = '1.18.12'
         springVersion = '2.3.3.RELEASE'
     }
@@ -11,9 +10,6 @@ plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion"
-    id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
-    id "org.jetbrains.kotlin.plugin.spring" version "$kotlinVersion"
 }
 
 repositories {
@@ -30,8 +26,6 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java-library'
-    apply plugin: 'kotlin'
-    apply plugin: 'kotlin-kapt'
 
     repositories {
         jcenter()
@@ -48,13 +42,6 @@ allprojects {
         compileOnly {
             extendsFrom annotationProcessor
         }
-    }
-
-    compileKotlin {
-        kotlinOptions.jvmTarget = "11"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "11"
     }
 
     test {
@@ -75,10 +62,8 @@ subprojects {
 
 dependencies {
     implementation project(':modules:common')
+    implementation project(':modules:items-api')
     implementation project(':modules:libraries-api')
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "org.jetbrains.kotlin:kotlin-maven-allopen:$kotlinVersion"
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -86,7 +71,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-    kapt "org.springframework.boot:spring-boot-configuration-processor"
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
