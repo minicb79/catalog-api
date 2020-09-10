@@ -1,5 +1,7 @@
 include 'modules:libraries-api'
+include 'modules:items-api'
 include 'modules:common'
 findProject(':modules:common')?.name = 'common'
 findProject(':modules:libraries-api')?.name = 'libraries-api'
+findProject(':modules:items-api')?.name = 'items-api'
 

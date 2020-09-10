@@ -2,6 +2,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    kapt "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.jetbrains.kotlin:kotlin-maven-allopen:$kotlinVersion"
 
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
