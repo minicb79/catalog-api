@@ -1,12 +1,11 @@
 package com.minicdesign.catalog.api.dbTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import com.minicdesign.catalog.api.items.repositories.db.BookDao;
-import com.minicdesign.catalog.api.items.repositories.db.BookJpaRepository;
+import com.minicdesign.catalog.api.items.repositories.db.RecipeDao;
+import com.minicdesign.catalog.api.items.repositories.db.RecipeJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,22 +16,21 @@ import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
 @ActiveProfiles("test")
-public class BookJpaRepositoryTest {
+public class RecipeJpaRepositoryTest {
 
   @Autowired
-  private BookJpaRepository repo;
+  private RecipeJpaRepository repo;
 
   @Test
   public void testDbAccess() {
-    List<BookDao> itemList = repo.findAll();
+    List<RecipeDao> itemList = repo.findAll();
 
 
-    assertEquals(6, itemList.size());
-    BookDao dao = itemList.get(5);
-    assertEquals("Item 7", dao.getTitle());
-    assertEquals("The 7th Subtitle", dao.getSubtitle());
-    assertNull(dao.getSummary());
-    assertEquals("7777777777", dao.getBarcode());
+    assertEquals(1, itemList.size());
+    RecipeDao dao = itemList.get(0);
+    assertEquals("Item 6", dao.getTitle());
+    assertEquals("breakfast", dao.getMeal());
+//    assertNull(dao.getSubtitle());
+//    assertNull(dao.getSummary());
   }
-
 }

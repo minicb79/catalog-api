@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `recipe`;
 DROP TABLE IF EXISTS `book`;
 DROP TABLE IF EXISTS `item`;
 DROP TABLE IF EXISTS `library`;
@@ -23,6 +24,11 @@ CREATE TABLE IF NOT EXISTS `book`(
     `isbn` VARCHAR(20),
     `barcode` VARCHAR(20),
     `pages` integer
+);
+
+CREATE TABLE IF NOT EXISTS `recipe`(
+    `id` INTEGER PRIMARY KEY,
+    `meal` VARCHAR(30)
 );
 
 ALTER TABLE `item` ADD FOREIGN KEY ( `library_id` ) REFERENCES `library`(`id`);

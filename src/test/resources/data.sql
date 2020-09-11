@@ -29,3 +29,4 @@ INSERT INTO `book`(`id`, `author`, `isbn`, `barcode`, `pages`) VALUES (4, 'Autho
 INSERT INTO `book`(`id`, `author`, `isbn`, `barcode`, `pages`) VALUES (5, 'Author 5', '52345678901234', '5555555555', 588);
 INSERT INTO `book`(`id`, `author`, `isbn`, `barcode`, `pages`) VALUES (7, 'Author 7', '72345678901234', '7777777777', 712);
 
+INSERT INTO `recipe`(`id`, `meal`) VALUES (6, 'breakfast');
