@@ -1,5 +1,7 @@
 package com.minicdesign.catalog.api.items.controllers;
 
+import javax.validation.Valid;
+
 import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsRequest;
 import com.minicdesign.catalog.api.items.controllers.domain.response.ItemDetailsResponse;
 import com.minicdesign.catalog.api.items.controllers.usecases.CreateItemUseCase;
@@ -22,7 +24,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDetailsResponse createItem(
             @PathVariable("libraryId") Long libraryId,
-            @RequestBody ItemDetailsRequest request) throws Exception {
+            @RequestBody @Valid ItemDetailsRequest request) throws Exception {
 
         ItemDomain domain = createItemService.createItem(ItemDomain.from(request, libraryId));
         return ItemDetailsResponse.from(domain);

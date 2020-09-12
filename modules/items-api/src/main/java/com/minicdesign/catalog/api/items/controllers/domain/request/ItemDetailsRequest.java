@@ -2,6 +2,7 @@ package com.minicdesign.catalog.api.items.controllers.domain.request;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.minicdesign.catalog.api.items.domain.ItemType;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemDetailsRequest {
 
-    @NotBlank
+    @NotNull(message = "must be present [boardgame, book, magazine, recipe, url]")
     private ItemType type;
 
     @NotBlank
@@ -34,7 +35,7 @@ public class ItemDetailsRequest {
     @Size(max = 20)
     private String barcode;
 
-    @Min(0)
+    @Min(value = 1, message = "must be blank or greater than or equal to 1")
     private Integer pages;
 
     private String meal;

@@ -2,8 +2,7 @@ package com.minicdesign.catalog.api.integrationTests;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsRequest;
@@ -31,23 +30,89 @@ public class ItemControllerIntegrationTest {
 
     @Test
     public void testCreateItem() throws Exception {
-        ItemDetailsRequest item = new ItemDetailsRequest();
-        item.setTitle("New Title");
-        item.setSubtitle("New Subtitle");
-        item.setAuthor("New Author");
-        item.setIsbn("New ISBN");
-        item.setBarcode("New Barcode");
-        item.setType(ItemType.BOOK);
+        ItemDetailsRequest book = new ItemDetailsRequest();
+        book.setTitle("New Title");
+        book.setSubtitle("New Subtitle");
+        book.setAuthor("New Author");
+        book.setIsbn("New ISBN");
+        book.setBarcode("New Barcode");
+        book.setType(ItemType.BOOK);
 
         mockMvc.perform(post("/libraries/2/items")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(item)))
+                .content(objectMapper.writeValueAsString(book)))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(8L))
                 .andExpect(jsonPath("$.title").value("New Title"))
                 .andExpect(jsonPath("$.subtitle").value("New Subtitle"))
                 .andExpect(jsonPath("$.author").value("New Author"))
-                .andExpect(jsonPath("$.isbn").value("New ISBN"));
+                .andExpect(jsonPath("$.isbn").value("New ISBN"))
+                .andExpect(jsonPath("$.libraryId").value(2L))
+                .andExpect(jsonPath("$.type").value("book"));
+
+        ItemDetailsRequest recipe = new ItemDetailsRequest();
+        recipe.setTitle("New Recipe");
+        recipe.setSubtitle("New Recipe Subtitle");
+        recipe.setType(ItemType.RECIPE);
+        recipe.setMeal("breakfast");
+
+        mockMvc.perform(post("/libraries/3/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipe)))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(9L))
+                .andExpect(jsonPath("$.title").value("New Recipe"))
+                .andExpect(jsonPath("$.meal").value("breakfast"))
+                .andExpect(jsonPath("$.isbn").doesNotExist());
+    }
+
+    @Test
+    public void testCreateItemWithExtraPropertiesInRequest() throws Exception {
+        ItemDetailsRequest book = new ItemDetailsRequest();
+        book.setTitle("New Title");
+        book.setSubtitle("New Subtitle");
+        book.setAuthor("New Author");
+        book.setIsbn("New ISBN");
+        book.setBarcode("New Barcode");
+        book.setType(ItemType.BOOK);
+        book.setMeal("lunch");
+
+        mockMvc.perform(post("/libraries/3/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(8L))
+                .andExpect(jsonPath("$.title").value("New Title"))
+                .andExpect(jsonPath("$.libraryId").value(3L))
+                .andExpect(jsonPath("$.type").value("book"))
+                .andExpect(jsonPath("$.meal").doesNotExist());
+    }
+
+    @Test
+    public void testValidationOnCreate() throws Exception {
+        // Missing mandatory title and type, isbn and barcode too long, pages negative
+        // Meal is irrelevant and not an exception
+        ItemDetailsRequest book = new ItemDetailsRequest();
+        book.setSubtitle("New Subtitle");
+        book.setAuthor("New Author");
+        book.setIsbn("New ISBN that is too long");
+        book.setBarcode("New Barcode that is waaay tooooo looooooong");
+        book.setPages(-5);
+        book.setMeal("lunch");
+
+        mockMvc.perform(post("/libraries/3/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.errorCode").value("VE-001"))
+                .andExpect(jsonPath("$.validationErrors").exists())
+                .andExpect(jsonPath("$.validationErrors").isMap())
+                .andExpect(jsonPath("$.validationErrors").isNotEmpty())
+                .andExpect(jsonPath("$.validationErrors.length()").value(5));
     }
 }

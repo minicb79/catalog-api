@@ -1,5 +1,7 @@
 package com.minicdesign.catalog.api.items.domain;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum ItemType {
