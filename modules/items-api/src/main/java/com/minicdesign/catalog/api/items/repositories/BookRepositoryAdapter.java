@@ -1,25 +1,36 @@
 package com.minicdesign.catalog.api.items.repositories;
 
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
+import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.db.BookDao;
 import com.minicdesign.catalog.api.items.repositories.db.BookJpaRepository;
+import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
+import com.minicdesign.catalog.api.libraries.repositories.LibraryDaoMapper;
+import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class BookRepositoryAdapter {
+public class BookRepositoryAdapter implements RepositoryAdapter {
 
   private final BookJpaRepository jpaRepository;
 
-  public ItemDomain createBook(ItemDomain domain) {
+  @Override
+  public ItemType appliesTo() {
+    return ItemType.BOOK;
+  }
+
+  @Override
+  public ItemDomain createItem(ItemDomain domain, LibraryDomain libraryDomain) {
 
     if (domain == null) {
-      throw new IllegalArgumentException("BookDomain must not be null when creating a Book.");
+      throw new IllegalArgumentException("ItemDomain must not be null when create an Item.");
     }
 
-    BookDao dao = jpaRepository.save(BookDaoMapper.domainToDao(domain));
-    return BookDaoMapper.daoToDomain(dao);
+    LibraryDao libraryDao = LibraryDaoMapper.domainToDao(libraryDomain);
 
+    BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(domain, libraryDao));
+    return BookDaoMapper.daoToDomain(itemDao);
   }
 }
