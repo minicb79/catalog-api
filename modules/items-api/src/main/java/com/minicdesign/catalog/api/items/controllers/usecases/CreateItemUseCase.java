@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CreateItemUseCase {
 
-  ItemDomain createItem(ItemDomain domain);
+    ItemDomain createItem(ItemDomain domain);
 }

@@ -23,31 +23,31 @@ import org.springframework.data.domain.Sort;
 @ExtendWith(MockitoExtension.class)
 public class GetLibraryListServiceTest {
 
-  @Mock
-  private LibraryRepositoryAdapter repository;
+    @Mock
+    private LibraryRepositoryAdapter repository;
 
-  private GetLibraryListService service;
+    private GetLibraryListService service;
 
-  @BeforeEach
-  void setup() {
-    service = new GetLibraryListService(repository);
-  }
+    @BeforeEach
+    void setup() {
+        service = new GetLibraryListService(repository);
+    }
 
-  @Test
-  void givenRequestForFirstPageOfSix_whenGetLibraryList_thenPageOfResultsReturned() {
+    @Test
+    void givenRequestForFirstPageOfSix_whenGetLibraryList_thenPageOfResultsReturned() {
 
-    List<LibraryDomain> domainList = new ArrayList<>();
-    domainList.add(new LibraryDomain(1L, "Library Domain 1", "Library Description 1"));
-    domainList.add(new LibraryDomain(2L, "Library Domain 2", "Library Description 2"));
+        List<LibraryDomain> domainList = new ArrayList<>();
+        domainList.add(new LibraryDomain(1L, "Library Domain 1", "Library Description 1"));
+        domainList.add(new LibraryDomain(2L, "Library Domain 2", "Library Description 2"));
 
-    Page<LibraryDomain> mockPage = new PageImpl<>(domainList, PageRequest.of(0, 2, Sort.unsorted()), 15);
+        Page<LibraryDomain> mockPage = new PageImpl<>(domainList, PageRequest.of(0, 2, Sort.unsorted()), 15);
 
-    when(repository.getLibrariesForPage(anyInt(), anyInt())).thenReturn(mockPage);
+        when(repository.getLibrariesForPage(anyInt(), anyInt())).thenReturn(mockPage);
 
-    Page<LibraryDomain> page = service.getLibraryList(0, 2);
+        Page<LibraryDomain> page = service.getLibraryList(0, 2);
 
-    assertNotNull(page);
-    assertEquals(2, page.getContent().size());
-  }
+        assertNotNull(page);
+        assertEquals(2, page.getContent().size());
+    }
 
 }

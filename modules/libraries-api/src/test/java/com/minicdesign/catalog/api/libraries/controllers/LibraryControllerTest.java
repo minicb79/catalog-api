@@ -30,69 +30,69 @@ import org.springframework.data.domain.PageRequest;
 @ExtendWith(MockitoExtension.class)
 public class LibraryControllerTest {
 
-  @Mock
-  private CreateLibraryService createLibraryService;
+    @Mock
+    private CreateLibraryService createLibraryService;
 
-  @Mock
-  private GetLibraryListUseCase getLibraryListService;
+    @Mock
+    private GetLibraryListUseCase getLibraryListService;
 
-  @Mock
-  private GetLibraryUseCase getLibraryUseCase;
+    @Mock
+    private GetLibraryUseCase getLibraryUseCase;
 
-  @Mock
-  private UpdateLibraryUseCase updateLibraryUseCase;
+    @Mock
+    private UpdateLibraryUseCase updateLibraryUseCase;
 
-  @Mock
-  private GetLibraryCountUseCase getLibraryCountUseCase;
+    @Mock
+    private GetLibraryCountUseCase getLibraryCountUseCase;
 
-  private LibraryController controller;
+    private LibraryController controller;
 
-  @BeforeEach
-  public void setup() {
-    controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryUseCase, updateLibraryUseCase, getLibraryCountUseCase);
-  }
+    @BeforeEach
+    public void setup() {
+        controller = new LibraryController(createLibraryService, getLibraryListService, getLibraryUseCase, updateLibraryUseCase, getLibraryCountUseCase);
+    }
 
-  @Test
-  public void givenValidRequest_whenCreateLibrary_thenCreatedResponseReturned() {
+    @Test
+    public void givenValidRequest_whenCreateLibrary_thenCreatedResponseReturned() {
 
-    LibraryDetailsRequest request = new LibraryDetailsRequest();
-    request.setName("Library Name");
+        LibraryDetailsRequest request = new LibraryDetailsRequest();
+        request.setName("Library Name");
 
-    request.setDescription("Library Long Description");
+        request.setDescription("Library Long Description");
 
-    LibraryDomain createdDomain = new LibraryDomain(3L, "Library Name", "Library Long Description");
+        LibraryDomain createdDomain = new LibraryDomain(3L, "Library Name", "Library Long Description");
 
-    when(createLibraryService.createLibrary(any())).thenReturn(createdDomain);
+        when(createLibraryService.createLibrary(any())).thenReturn(createdDomain);
 
-    LibraryDetailsResponse response = controller.createLibrary(request);
+        LibraryDetailsResponse response = controller.createLibrary(request);
 
-    assertNotNull(response);
-    assertNotNull(response.getId());
-    assertEquals(request.getName(), response.getName());
-    assertEquals(request.getDescription(), response.getDescription());
-  }
+        assertNotNull(response);
+        assertNotNull(response.getId());
+        assertEquals(request.getName(), response.getName());
+        assertEquals(request.getDescription(), response.getDescription());
+    }
 
-  @Test
-  public void givenValidRequest_whenGetLibraryList_thenPageOfDataReturned() {
+    @Test
+    public void givenValidRequest_whenGetLibraryList_thenPageOfDataReturned() {
 
-    List<LibraryDomain> libraryDomainList = new ArrayList<>();
-    libraryDomainList.add(new LibraryDomain(1L, "Library 1", "Description 1"));
-    libraryDomainList.add(new LibraryDomain(2L, "Library 2", ""));
-    libraryDomainList.add(new LibraryDomain(3L, "Library 3", null));
-    libraryDomainList.add(new LibraryDomain(4L, "Library 4", "Description 4"));
-    libraryDomainList.add(new LibraryDomain(5L, "Library 5", null));
-    libraryDomainList.add(new LibraryDomain(6L, "Library 6", "Quite a long description for this test."));
+        List<LibraryDomain> libraryDomainList = new ArrayList<>();
+        libraryDomainList.add(new LibraryDomain(1L, "Library 1", "Description 1"));
+        libraryDomainList.add(new LibraryDomain(2L, "Library 2", ""));
+        libraryDomainList.add(new LibraryDomain(3L, "Library 3", null));
+        libraryDomainList.add(new LibraryDomain(4L, "Library 4", "Description 4"));
+        libraryDomainList.add(new LibraryDomain(5L, "Library 5", null));
+        libraryDomainList.add(new LibraryDomain(6L, "Library 6", "Quite a long description for this test."));
 
-    Page<LibraryDomain> domainPage = new PageImpl<>(libraryDomainList, PageRequest.of(0, 6), 15);
+        Page<LibraryDomain> domainPage = new PageImpl<>(libraryDomainList, PageRequest.of(0, 6), 15);
 
-    when(getLibraryListService.getLibraryList(anyInt(), anyInt())).thenReturn(domainPage);
+        when(getLibraryListService.getLibraryList(anyInt(), anyInt())).thenReturn(domainPage);
 
-    PagedLibraryDetailsListResponse libraryList = controller.getLibraryList(0, 6);
+        PagedLibraryDetailsListResponse libraryList = controller.getLibraryList(0, 6);
 
-    assertNotNull(libraryList);
-    assertEquals(15, libraryList.getCount());
-    assertEquals(3, libraryList.getPageCount());
-    assertEquals(0, libraryList.getPage());
-  }
+        assertNotNull(libraryList);
+        assertEquals(15, libraryList.getCount());
+        assertEquals(3, libraryList.getPageCount());
+        assertEquals(0, libraryList.getPage());
+    }
 
 }

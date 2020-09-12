@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class LibraryDetailsRequest {
 
-  @NotBlank
-  @Size(min = 2, max = 40)
-  private String name;
+    @NotBlank
+    @Size(min = 2, max = 40)
+    private String name;
 
-  @Size(max = 160)
-  private String description;
+    @Size(max = 160)
+    private String description;
 
 }

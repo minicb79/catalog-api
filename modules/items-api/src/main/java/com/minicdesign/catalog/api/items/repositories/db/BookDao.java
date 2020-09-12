@@ -13,16 +13,16 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class BookDao extends ItemDao {
 
-  @Column(length = 60)
-  private String author;
+    @Column(length = 60)
+    private String author;
 
-  @Column(length = 20)
-  private String isbn;
+    @Column(length = 20)
+    private String isbn;
 
-  @Column(length = 20)
-  private String barcode;
+    @Column(length = 20)
+    private String barcode;
 
-  @Column
-  private Integer pages;
+    @Column
+    private Integer pages;
 
 }

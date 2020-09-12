@@ -17,39 +17,39 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class CreateLibraryServiceTest {
 
-  @Mock
-  LibraryRepositoryAdapter repository;
+    @Mock
+    LibraryRepositoryAdapter repository;
 
-  CreateLibraryService service;
+    CreateLibraryService service;
 
-  @BeforeEach
-  void setup() {
-    service = new CreateLibraryService(repository);
-  }
+    @BeforeEach
+    void setup() {
+        service = new CreateLibraryService(repository);
+    }
 
-  @Test
-  void givenNullLibrary_whenCreateLibrary_thenExceptionThrown() {
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      service.createLibrary(null);
-    });
-  }
+    @Test
+    void givenNullLibrary_whenCreateLibrary_thenExceptionThrown() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            service.createLibrary(null);
+        });
+    }
 
-  @Test
-  void givenValidLibrary_whenCreateLibrary_thenDomainWithIdReturned() {
-    LibraryDomain requestDomain = new LibraryDomain();
-    requestDomain.setName("Library Name");
-    requestDomain.setDescription("A Description for the Library.");
+    @Test
+    void givenValidLibrary_whenCreateLibrary_thenDomainWithIdReturned() {
+        LibraryDomain requestDomain = new LibraryDomain();
+        requestDomain.setName("Library Name");
+        requestDomain.setDescription("A Description for the Library.");
 
-    LibraryDomain repoDomain = new LibraryDomain();
-    repoDomain.setId(4L);
-    repoDomain.setName("Library Name");
-    repoDomain.setDescription("A Description for the Library.");
+        LibraryDomain repoDomain = new LibraryDomain();
+        repoDomain.setId(4L);
+        repoDomain.setName("Library Name");
+        repoDomain.setDescription("A Description for the Library.");
 
-    when(repository.createLibrary(any())).thenReturn(repoDomain);
+        when(repository.createLibrary(any())).thenReturn(repoDomain);
 
-    LibraryDomain createdDomain = service.createLibrary(requestDomain);
+        LibraryDomain createdDomain = service.createLibrary(requestDomain);
 
-    assertNotNull(createdDomain);
-    assertEquals(repoDomain, createdDomain);
-  }
+        assertNotNull(createdDomain);
+        assertEquals(repoDomain, createdDomain);
+    }
 }

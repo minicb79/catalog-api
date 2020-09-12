@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface GetLibraryListUseCase {
 
-  Page<LibraryDomain> getLibraryList(int page, int size);
+    Page<LibraryDomain> getLibraryList(int page, int size);
 }

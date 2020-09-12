@@ -17,28 +17,30 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemDetailsResponse {
 
-  private Long id;
-  private ItemType type;
-  private String title;
-  private String subtitle;
-  private String summary;
-  private String author;
-  private String isbn;
-  private String barcode;
-  private Integer pages;
-  private String meal;
+    private Long id;
+    private ItemType type;
+    private String title;
+    private String subtitle;
+    private String summary;
+    private String author;
+    private String isbn;
+    private String barcode;
+    private Integer pages;
+    private String meal;
+    private Long libraryId;
 
-  public static ItemDetailsResponse from(ItemDomain domain) {
-    return new ItemDetailsResponse(
-        domain.getId(),
-        domain.getType() == ItemType.ALL ? null : domain.getType(),
-        domain.getTitle(),
-        domain.getSubtitle(),
-        domain.getSummary(),
-        domain.getAuthor(),
-        domain.getIsbn(),
-        domain.getBarcode(),
-        domain.getPages(),
-        domain.getMeal());
-  }
+    public static ItemDetailsResponse from(ItemDomain domain) {
+        return new ItemDetailsResponse(
+                domain.getId(),
+                domain.getType() == ItemType.ALL ? null : domain.getType(),
+                domain.getTitle(),
+                domain.getSubtitle(),
+                domain.getSummary(),
+                domain.getAuthor(),
+                domain.getIsbn(),
+                domain.getBarcode(),
+                domain.getPages(),
+                domain.getMeal(),
+                domain.getLibraryId());
+    }
 }

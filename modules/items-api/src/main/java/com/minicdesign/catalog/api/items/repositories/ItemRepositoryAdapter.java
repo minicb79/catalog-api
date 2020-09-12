@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ItemRepositoryAdapter implements RepositoryAdapter {
 
-  @Override
-  public ItemType appliesTo() {
-    return ItemType.ALL;
-  }
+    @Override
+    public ItemType appliesTo() {
+        return ItemType.ALL;
+    }
 
-  @Override
-  public ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain) {
-    throw new UnsupportedOperationException("Can not create Item in ItemRepositoryAdapter.");
-  }
+    @Override
+    public ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain) {
+        throw new UnsupportedOperationException("Can not create Item in ItemRepositoryAdapter.");
+    }
 
 }

@@ -17,24 +17,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ItemDetailsRepositoryManager implements InitializingBean {
 
-  @Autowired
-  private final ItemRepositoryAdapter itemRepository;
+    @Autowired
+    private final ItemRepositoryAdapter itemRepository;
 
-  @Autowired
-  private final BookRepositoryAdapter bookRepository;
+    @Autowired
+    private final BookRepositoryAdapter bookRepository;
 
-  @Autowired
-  private final RecipeRepositoryAdapter recipeRepository;
+    @Autowired
+    private final RecipeRepositoryAdapter recipeRepository;
 
-  private List<RepositoryAdapter> repositoryAdapters;
+    private List<RepositoryAdapter> repositoryAdapters;
 
-  @Override
-  public void afterPropertiesSet() throws Exception {
-    repositoryAdapters = Arrays.asList(itemRepository, bookRepository, recipeRepository);
-  }
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        repositoryAdapters = Arrays.asList(itemRepository, bookRepository, recipeRepository);
+    }
 
-  @Bean
-  public List<RepositoryAdapter> getRepositoryAdapters() {
-    return repositoryAdapters;
-  }
+    @Bean
+    public List<RepositoryAdapter> getRepositoryAdapters() {
+        return repositoryAdapters;
+    }
 }

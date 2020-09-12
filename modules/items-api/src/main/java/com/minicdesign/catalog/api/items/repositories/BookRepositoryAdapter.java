@@ -14,23 +14,23 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class BookRepositoryAdapter implements RepositoryAdapter {
 
-  private final BookJpaRepository jpaRepository;
+    private final BookJpaRepository jpaRepository;
 
-  @Override
-  public ItemType appliesTo() {
-    return ItemType.BOOK;
-  }
-
-  @Override
-  public ItemDomain createItem(ItemDomain domain, LibraryDomain libraryDomain) {
-
-    if (domain == null) {
-      throw new IllegalArgumentException("ItemDomain must not be null when create an Item.");
+    @Override
+    public ItemType appliesTo() {
+        return ItemType.BOOK;
     }
 
-    LibraryDao libraryDao = LibraryDaoMapper.domainToDao(libraryDomain);
+    @Override
+    public ItemDomain createItem(ItemDomain domain, LibraryDomain libraryDomain) {
 
-    BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(domain, libraryDao));
-    return BookDaoMapper.daoToDomain(itemDao);
-  }
+        if (domain == null) {
+            throw new IllegalArgumentException("ItemDomain must not be null when create an Item.");
+        }
+
+        LibraryDao libraryDao = LibraryDaoMapper.domainToDao(libraryDomain);
+
+        BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(domain, libraryDao));
+        return BookDaoMapper.daoToDomain(itemDao);
+    }
 }

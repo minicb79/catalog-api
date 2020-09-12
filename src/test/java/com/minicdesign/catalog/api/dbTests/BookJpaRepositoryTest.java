@@ -19,20 +19,20 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class BookJpaRepositoryTest {
 
-  @Autowired
-  private BookJpaRepository repo;
+    @Autowired
+    private BookJpaRepository repo;
 
-  @Test
-  public void testDbAccess() {
-    List<BookDao> itemList = repo.findAll();
+    @Test
+    public void testDbAccess() {
+        List<BookDao> itemList = repo.findAll();
 
 
-    assertEquals(6, itemList.size());
-    BookDao dao = itemList.get(5);
-    assertEquals("Item 7", dao.getTitle());
-    assertEquals("The 7th Subtitle", dao.getSubtitle());
-    assertNull(dao.getSummary());
-    assertEquals("7777777777", dao.getBarcode());
-  }
+        assertEquals(6, itemList.size());
+        BookDao dao = itemList.get(5);
+        assertEquals("Item 7", dao.getTitle());
+        assertEquals("The 7th Subtitle", dao.getSubtitle());
+        assertNull(dao.getSummary());
+        assertEquals("7777777777", dao.getBarcode());
+    }
 
 }

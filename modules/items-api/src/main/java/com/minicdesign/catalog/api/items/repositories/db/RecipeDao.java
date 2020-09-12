@@ -13,6 +13,6 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class RecipeDao extends ItemDao {
 
-  @Column
-  private String meal;
+    @Column
+    private String meal;
 }

@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ValidationErrorAdvice {
 
-  @ResponseBody
-  @ExceptionHandler(MethodArgumentNotValidException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ValidationErrorResponse validationExceptionHandler(MethodArgumentNotValidException e) {
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidationErrorResponse validationExceptionHandler(MethodArgumentNotValidException e) {
 
-    Map<String, String> errors = new HashMap<>();
-    e.getBindingResult().getAllErrors().forEach((error) -> {
-      String fieldName = ((FieldError) error).getField();
-      String errorMessage = error.getDefaultMessage();
-      errors.put(fieldName, errorMessage);
-    });
+        Map<String, String> errors = new HashMap<>();
+        e.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
 
-    return ValidationErrorResponse.builder()
-        .errorCode("VE-001")
-        .message("Validation errors occurred.")
-        .validationErrors(errors)
-        .build();
-  }
+        return ValidationErrorResponse.builder()
+                .errorCode("VE-001")
+                .message("Validation errors occurred.")
+                .validationErrors(errors)
+                .build();
+    }
 }

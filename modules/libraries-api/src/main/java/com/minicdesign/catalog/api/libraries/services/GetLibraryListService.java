@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetLibraryListService implements GetLibraryListUseCase {
 
-  private final LibraryRepositoryAdapter libraryRepository;
+    private final LibraryRepositoryAdapter libraryRepository;
 
-  @Override
-  public Page<LibraryDomain> getLibraryList(int page, int size) {
+    @Override
+    public Page<LibraryDomain> getLibraryList(int page, int size) {
 
-    return libraryRepository.getLibrariesForPage(page, size);
-  }
+        return libraryRepository.getLibrariesForPage(page, size);
+    }
 }

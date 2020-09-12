@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UpdateLibraryService implements UpdateLibraryUseCase {
 
-  private final LibraryRepositoryAdapter repository;
+    private final LibraryRepositoryAdapter repository;
 
-  @Override
-  public LibraryDomain updateLibrary(LibraryDomain domain) {
-    return repository.updateLibrary(domain);
-  }
+    @Override
+    public LibraryDomain updateLibrary(LibraryDomain domain) {
+        return repository.updateLibrary(domain);
+    }
 }

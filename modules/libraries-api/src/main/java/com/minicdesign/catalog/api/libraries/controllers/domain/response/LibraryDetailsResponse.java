@@ -15,16 +15,16 @@ import lombok.ToString;
 @ToString
 public class LibraryDetailsResponse {
 
-  private Long id;
-  private String name;
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String description;
+    private Long id;
+    private String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String description;
 
-  public static LibraryDetailsResponse from(LibraryDomain domain) {
-    return new LibraryDetailsResponse(
-        domain.getId(),
-        domain.getName(),
-        domain.getDescription());
-  }
+    public static LibraryDetailsResponse from(LibraryDomain domain) {
+        return new LibraryDetailsResponse(
+                domain.getId(),
+                domain.getName(),
+                domain.getDescription());
+    }
 
 }

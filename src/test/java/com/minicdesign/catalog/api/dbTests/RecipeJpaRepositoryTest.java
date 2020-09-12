@@ -1,6 +1,7 @@
 package com.minicdesign.catalog.api.dbTests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -18,19 +19,19 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class RecipeJpaRepositoryTest {
 
-  @Autowired
-  private RecipeJpaRepository repo;
+    @Autowired
+    private RecipeJpaRepository repo;
 
-  @Test
-  public void testDbAccess() {
-    List<RecipeDao> itemList = repo.findAll();
+    @Test
+    public void testDbAccess() {
+        List<RecipeDao> itemList = repo.findAll();
 
 
-    assertEquals(1, itemList.size());
-    RecipeDao dao = itemList.get(0);
-    assertEquals("Item 6", dao.getTitle());
-    assertEquals("breakfast", dao.getMeal());
-    assertNull(dao.getSubtitle());
-    assertNull(dao.getSummary());
-  }
+        assertEquals(1, itemList.size());
+        RecipeDao dao = itemList.get(0);
+        assertEquals("Item 6", dao.getTitle());
+        assertEquals("breakfast", dao.getMeal());
+        assertNull(dao.getSubtitle());
+        assertNull(dao.getSummary());
+    }
 }

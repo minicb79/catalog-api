@@ -12,30 +12,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemDetailsRequest {
 
-  @NotBlank
-  private ItemType type;
+    @NotBlank
+    private ItemType type;
 
-  @NotBlank
-  @Size(max = 60)
-  private String title;
+    @NotBlank
+    @Size(max = 60)
+    private String title;
 
-  @Size(max = 120)
-  private String subtitle;
+    @Size(max = 120)
+    private String subtitle;
 
-  @Size(max = 1024)
-  private String summary;
+    @Size(max = 1024)
+    private String summary;
 
-  @Size(max = 60)
-  private String author;
+    @Size(max = 60)
+    private String author;
 
-  @Size(max = 20)
-  private String isbn;
+    @Size(max = 20)
+    private String isbn;
 
-  @Size(max = 20)
-  private String barcode;
+    @Size(max = 20)
+    private String barcode;
 
-  @Min(0)
-  private Integer pages;
+    @Min(0)
+    private Integer pages;
 
-  private String meal;
+    private String meal;
 }
