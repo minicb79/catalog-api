@@ -115,4 +115,22 @@ public class ItemControllerIntegrationTest {
                 .andExpect(jsonPath("$.validationErrors").isNotEmpty())
                 .andExpect(jsonPath("$.validationErrors.length()").value(5));
     }
+
+    @Test
+    public void testInvalidLibrary() throws Exception {
+        ItemDetailsRequest recipe = new ItemDetailsRequest();
+        recipe.setTitle("New Recipe");
+        recipe.setSubtitle("New Recipe Subtitle");
+        recipe.setType(ItemType.RECIPE);
+        recipe.setMeal("breakfast");
+
+        // Library with ID of 24 does not exist in the test data.
+        mockMvc.perform(post("/libraries/24/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipe)))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.errorCode").value("NF-404"));
+    }
 }
