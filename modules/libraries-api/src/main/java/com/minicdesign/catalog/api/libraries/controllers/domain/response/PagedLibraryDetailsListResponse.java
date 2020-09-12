@@ -11,13 +11,13 @@ import org.springframework.data.domain.Pageable;
 @Data
 public class PagedLibraryDetailsListResponse {
 
-  private List<LibraryDetailsResponse> libraryList;
-  private int page;
-  private long count;
-  private long pageCount;
+    private List<LibraryDetailsResponse> libraryList;
+    private int page;
+    private long count;
+    private long pageCount;
 
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private Pageable previousPage;
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private Pageable nextPage;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Pageable previousPage;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Pageable nextPage;
 }

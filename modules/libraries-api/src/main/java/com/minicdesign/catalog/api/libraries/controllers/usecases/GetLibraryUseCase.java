@@ -4,5 +4,5 @@ import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 
 public interface GetLibraryUseCase {
 
-  LibraryDomain getLibrary(Long id);
+    LibraryDomain getLibrary(Long id);
 }

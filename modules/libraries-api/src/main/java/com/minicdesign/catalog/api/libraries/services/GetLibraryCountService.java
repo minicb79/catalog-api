@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetLibraryCountService implements GetLibraryCountUseCase {
 
-  private final LibraryRepositoryAdapter repository;
+    private final LibraryRepositoryAdapter repository;
 
-  @Override
-  public long getCount() {
-    return repository.getCount();
-  }
+    @Override
+    public long getCount() {
+        return repository.getCount();
+    }
 }

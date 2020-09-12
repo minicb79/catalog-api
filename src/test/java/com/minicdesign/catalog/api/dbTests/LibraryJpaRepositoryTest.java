@@ -20,31 +20,31 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class LibraryJpaRepositoryTest {
 
-  @Autowired
-  private LibraryJpaRepository repo;
+    @Autowired
+    private LibraryJpaRepository repo;
 
-  @Test
-  public void testDbAccess() {
-    List<LibraryDao> libraryList = repo.findAll();
-    assertEquals(14, libraryList.size());
-  }
+    @Test
+    public void testDbAccess() {
+        List<LibraryDao> libraryList = repo.findAll();
+        assertEquals(14, libraryList.size());
+    }
 
-  @Test
-  public void testSaveLibrary() {
-    LibraryDao library = new LibraryDao();
-    library.setName("New Library");
-    library.setDescription("This has a description");
+    @Test
+    public void testSaveLibrary() {
+        LibraryDao library = new LibraryDao();
+        library.setName("New Library");
+        library.setDescription("This has a description");
 
-    LibraryDao savedDao = repo.save(library);
+        LibraryDao savedDao = repo.save(library);
 
-    assertNotNull(savedDao.getId());
-    assertEquals(savedDao.getId(), library.getId());
-  }
+        assertNotNull(savedDao.getId());
+        assertEquals(savedDao.getId(), library.getId());
+    }
 
-  @Test
-  public void testLibraryCountById() {
-    int count = repo.countById(3L);
-    assertEquals(1, count);
-  }
+    @Test
+    public void testLibraryCountById() {
+        int count = repo.countById(3L);
+        assertEquals(1, count);
+    }
 
 }

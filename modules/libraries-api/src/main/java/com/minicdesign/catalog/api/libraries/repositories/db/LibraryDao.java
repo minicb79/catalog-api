@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LibraryDao {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-  @Column(nullable = false, length = 40)
-  private String name;
+    @Column(nullable = false, length = 40)
+    private String name;
 
-  @Column(length = 160)
-  private String description;
+    @Column(length = 160)
+    private String description;
 }

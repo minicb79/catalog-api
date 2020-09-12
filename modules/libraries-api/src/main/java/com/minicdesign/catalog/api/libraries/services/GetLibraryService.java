@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetLibraryService implements GetLibraryUseCase {
 
-  private final LibraryRepositoryAdapter repository;
+    private final LibraryRepositoryAdapter repository;
 
-  @Override
-  public LibraryDomain getLibrary(Long id) {
-    return repository.getLibrary(id);
-  }
+    @Override
+    public LibraryDomain getLibrary(Long id) {
+        return repository.getLibrary(id);
+    }
 }

@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 public class ValidationErrorResponse extends ErrorResponse {
 
-  private final Map<String, String> validationErrors;
+    private final Map<String, String> validationErrors;
 
 }

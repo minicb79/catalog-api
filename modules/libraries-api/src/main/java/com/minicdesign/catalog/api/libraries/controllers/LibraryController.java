@@ -30,52 +30,54 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LibraryController {
 
-  private final CreateLibraryUseCase createLibraryService;
-  private final GetLibraryListUseCase getLibraryListService;
-  private final GetLibraryUseCase getLibraryService;
-  private final UpdateLibraryUseCase updateLibraryService;
-  private final GetLibraryCountUseCase libraryCountService;
+    private final CreateLibraryUseCase createLibraryService;
+    private final GetLibraryListUseCase getLibraryListService;
+    private final GetLibraryUseCase getLibraryService;
+    private final UpdateLibraryUseCase updateLibraryService;
+    private final GetLibraryCountUseCase libraryCountService;
 
-  @PostMapping("/libraries")
-  @ResponseStatus(HttpStatus.CREATED)
-  public @ResponseBody
-  LibraryDetailsResponse createLibrary(@Valid @RequestBody LibraryDetailsRequest request) {
-    LibraryDomain domain = createLibraryService.createLibrary(LibraryDomain.from(request));
-    return LibraryDetailsResponse.from(domain);
-  }
+    @PostMapping("/libraries")
+    @ResponseStatus(HttpStatus.CREATED)
+    public @ResponseBody
+    LibraryDetailsResponse createLibrary(@Valid @RequestBody LibraryDetailsRequest request) {
+        LibraryDomain domain = createLibraryService.createLibrary(LibraryDomain.from(request));
+        return LibraryDetailsResponse.from(domain);
+    }
 
-  @GetMapping("/libraries")
-  @ResponseStatus(HttpStatus.OK)
-  public @ResponseBody
-  PagedLibraryDetailsListResponse getLibraryList(
-      @RequestParam(required = false, defaultValue = "0") Integer page,
-      @RequestParam(required = false, defaultValue = "6") Integer size) {
+    @GetMapping("/libraries")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    PagedLibraryDetailsListResponse getLibraryList(
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            @RequestParam(required = false, defaultValue = "6") Integer size) {
 
-    Page<LibraryDomain> libraryDomainPage = getLibraryListService.getLibraryList(page, size);
+        Page<LibraryDomain> libraryDomainPage = getLibraryListService.getLibraryList(page, size);
 
-    List<LibraryDetailsResponse> libraryDomainList = libraryDomainPage.stream()
-        .map(LibraryDetailsResponse::from).collect(Collectors.toList());
+        List<LibraryDetailsResponse> libraryDomainList = libraryDomainPage.stream()
+                .map(LibraryDetailsResponse::from).collect(Collectors.toList());
 
-    return new PagedLibraryDetailsListResponse(
-        libraryDomainList,
-        libraryDomainPage.getNumber(),
-        libraryDomainPage.getTotalElements(),
-        libraryDomainPage.getTotalPages(),
-        libraryDomainPage.previousOrFirstPageable(),
-        libraryDomainPage.nextOrLastPageable());
-  }
+        return new PagedLibraryDetailsListResponse(
+                libraryDomainList,
+                libraryDomainPage.getNumber(),
+                libraryDomainPage.getTotalElements(),
+                libraryDomainPage.getTotalPages(),
+                libraryDomainPage.previousOrFirstPageable(),
+                libraryDomainPage.nextOrLastPageable());
+    }
 
-  @GetMapping("/libraries/{id}")
-  @ResponseStatus(HttpStatus.OK)
-  public @ResponseBody LibraryDetailsResponse getLibrary(@PathVariable("id") Long id) {
-    LibraryDomain domain = getLibraryService.getLibrary(id);
-    return LibraryDetailsResponse.from(domain);
-  }
+    @GetMapping("/libraries/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    LibraryDetailsResponse getLibrary(@PathVariable("id") Long id) {
+        LibraryDomain domain = getLibraryService.getLibrary(id);
+        return LibraryDetailsResponse.from(domain);
+    }
 
-  @PutMapping("/libraries/{id}")
-  @ResponseStatus(HttpStatus.OK)
-  public @ResponseBody LibraryDetailsResponse updateLibrary(@PathVariable("id") Long id, @RequestBody LibraryDetailsRequest request) {
-    LibraryDomain domain = updateLibraryService.updateLibrary(LibraryDomain.from(request, id));
-    return LibraryDetailsResponse.from(domain);
-  }
+    @PutMapping("/libraries/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    LibraryDetailsResponse updateLibrary(@PathVariable("id") Long id, @RequestBody LibraryDetailsRequest request) {
+        LibraryDomain domain = updateLibraryService.updateLibrary(LibraryDomain.from(request, id));
+        return LibraryDetailsResponse.from(domain);
+    }
 }

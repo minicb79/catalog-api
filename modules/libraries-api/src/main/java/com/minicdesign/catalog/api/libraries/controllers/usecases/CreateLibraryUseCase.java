@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CreateLibraryUseCase {
 
-  LibraryDomain createLibrary(LibraryDomain library);
+    LibraryDomain createLibrary(LibraryDomain library);
 
 }

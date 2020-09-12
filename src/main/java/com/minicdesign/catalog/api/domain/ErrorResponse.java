@@ -12,10 +12,10 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class ErrorResponse {
 
-  private final String errorCode;
-  private final String message;
+    private final String errorCode;
+    private final String message;
 
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private final String longMessage;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final String longMessage;
 
 }

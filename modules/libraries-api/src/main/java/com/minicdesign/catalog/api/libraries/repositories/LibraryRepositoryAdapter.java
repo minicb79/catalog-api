@@ -17,56 +17,56 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class LibraryRepositoryAdapter {
 
-  private final LibraryJpaRepository jpaRepository;
+    private final LibraryJpaRepository jpaRepository;
 
-  public LibraryDomain createLibrary(LibraryDomain domain) {
+    public LibraryDomain createLibrary(LibraryDomain domain) {
 
-    if (domain == null) {
-      throw new IllegalArgumentException("LibraryDomain must not be null when creating a Library.");
+        if (domain == null) {
+            throw new IllegalArgumentException("LibraryDomain must not be null when creating a Library.");
+        }
+
+        LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
+        return LibraryDaoMapper.daoToDomain(libraryDao);
     }
 
-    LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
-    return LibraryDaoMapper.daoToDomain(libraryDao);
-  }
+    public Page<LibraryDomain> getLibrariesForPage(int page, int size) {
+        Page<LibraryDao> daoPage = jpaRepository.findAll(PageRequest.of(page, size));
 
-  public Page<LibraryDomain> getLibrariesForPage(int page, int size) {
-    Page<LibraryDao> daoPage = jpaRepository.findAll(PageRequest.of(page, size));
-
-    return new PageImpl<>(
-        daoPage.getContent().stream()
-            .map(LibraryDomain::from)
-            .collect(Collectors.toList()),
-        daoPage.getPageable(),
-        daoPage.getTotalElements());
-  }
-
-  public LibraryDomain getLibrary(long id) {
-    Optional<LibraryDao> dao = jpaRepository.findById(id);
-
-    if (dao.isEmpty()) {
-      throw new ItemNotFoundException(String.format("Library with id %d could not be found.", id));
+        return new PageImpl<>(
+                daoPage.getContent().stream()
+                        .map(LibraryDomain::from)
+                        .collect(Collectors.toList()),
+                daoPage.getPageable(),
+                daoPage.getTotalElements());
     }
 
-    return LibraryDaoMapper.daoToDomain(dao.get());
-  }
+    public LibraryDomain getLibrary(long id) {
+        Optional<LibraryDao> dao = jpaRepository.findById(id);
 
-  public LibraryDomain updateLibrary(LibraryDomain domain) {
-    if (domain == null) {
-      throw new IllegalArgumentException("LibraryDomain must not be null when updating a Library.");
+        if (dao.isEmpty()) {
+            throw new ItemNotFoundException(String.format("Library with id %d could not be found.", id));
+        }
+
+        return LibraryDaoMapper.daoToDomain(dao.get());
     }
 
-    int daoCount = jpaRepository.countById(domain.getId());
+    public LibraryDomain updateLibrary(LibraryDomain domain) {
+        if (domain == null) {
+            throw new IllegalArgumentException("LibraryDomain must not be null when updating a Library.");
+        }
 
-    if (daoCount == 0) {
-      throw new ItemNotFoundException(String.format("Library with id %d could not be found.", domain.getId()));
+        int daoCount = jpaRepository.countById(domain.getId());
+
+        if (daoCount == 0) {
+            throw new ItemNotFoundException(String.format("Library with id %d could not be found.", domain.getId()));
+        }
+
+        LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
+        return LibraryDaoMapper.daoToDomain(libraryDao);
     }
 
-    LibraryDao libraryDao = jpaRepository.save(LibraryDaoMapper.domainToDao(domain));
-    return LibraryDaoMapper.daoToDomain(libraryDao);
-  }
-
-  public long getCount() {
-    return jpaRepository.count();
-  }
+    public long getCount() {
+        return jpaRepository.count();
+    }
 
 }
