@@ -64,6 +64,11 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
     }
 
     @Override
+    public void updateItem(ItemDomain item) {
+        throw new UnsupportedOperationException("Can not update Item in ItemRepositoryAdapter. Consider using one of the more specific RepositoryAdapters.");
+    }
+
+    @Override
     protected LibraryFilterJpaRepository<ItemDao, Long> getJpaRepository() {
         return jpaRepository;
     }

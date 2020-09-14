@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import com.minicdesign.catalog.api.items.controllers.usecases.CreateItemUseCase;
+import com.minicdesign.catalog.api.items.controllers.usecases.UpdateItemUseCase;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.RepositoryAdapter;
@@ -14,14 +15,14 @@ import com.minicdesign.catalog.api.libraries.repositories.LibraryRepositoryAdapt
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateItemService implements CreateItemUseCase {
+public class ModifyItemService implements CreateItemUseCase, UpdateItemUseCase {
 
     private final List<RepositoryAdapter> repositoryAdapterList;
     private final LibraryRepositoryAdapter libraryRepository;
 
     private final Map<ItemType, RepositoryAdapter> repositoryAdapterMap = new HashMap<>();
 
-    public CreateItemService(List<RepositoryAdapter> repositoryAdapterList, LibraryRepositoryAdapter libraryRepository) {
+    public ModifyItemService(List<RepositoryAdapter> repositoryAdapterList, LibraryRepositoryAdapter libraryRepository) {
         this.repositoryAdapterList = repositoryAdapterList;
         this.libraryRepository = libraryRepository;
     }
@@ -45,5 +46,17 @@ public class CreateItemService implements CreateItemUseCase {
         LibraryDomain libraryDomain = libraryRepository.getLibrary(item.getLibraryId());
 
         return repository.createItem(item, libraryDomain);
+    }
+
+    @Override
+    public void updateItem(ItemDomain item) {
+
+        if (item == null) {
+            throw new IllegalArgumentException("ItemDomain must not be null when creating an Item.");
+        }
+
+        RepositoryAdapter repository = repositoryAdapterMap.get(item.getType());;
+
+        repository.updateItem(item);
     }
 }
