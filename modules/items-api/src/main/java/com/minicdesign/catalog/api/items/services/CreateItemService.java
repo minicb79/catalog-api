@@ -11,17 +11,20 @@ import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.RepositoryAdapter;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.LibraryRepositoryAdapter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CreateItemService implements CreateItemUseCase {
 
     private final List<RepositoryAdapter> repositoryAdapterList;
     private final LibraryRepositoryAdapter libraryRepository;
 
-    private Map<ItemType, RepositoryAdapter> repositoryAdapterMap = new HashMap<>();
+    private final Map<ItemType, RepositoryAdapter> repositoryAdapterMap = new HashMap<>();
+
+    public CreateItemService(List<RepositoryAdapter> repositoryAdapterList, LibraryRepositoryAdapter libraryRepository) {
+        this.repositoryAdapterList = repositoryAdapterList;
+        this.libraryRepository = libraryRepository;
+    }
 
     @PostConstruct
     public void init() {
