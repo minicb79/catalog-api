@@ -9,7 +9,6 @@ import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.LibraryDaoMapper;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -34,16 +33,6 @@ public class BookRepositoryAdapter extends AbstractRepositoryAdapter<BookDao> {
 
         BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(domain, libraryDao));
         return itemDao.daoToDomain();
-    }
-
-    @Override
-    public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
-        throw new UnsupportedOperationException("Considering using ItemRepositoryAdapter.getItemForPage().");
-    }
-
-    @Override
-    public ItemDomain getItem(long itemId) {
-        throw new UnsupportedOperationException("Considering using ItemRepositoryAdapter.getItem().");
     }
 
     @Override

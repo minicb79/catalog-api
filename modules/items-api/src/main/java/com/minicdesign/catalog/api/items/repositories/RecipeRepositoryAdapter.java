@@ -9,7 +9,6 @@ import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.LibraryDaoMapper;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -34,16 +33,6 @@ public class RecipeRepositoryAdapter extends AbstractRepositoryAdapter<RecipeDao
 
         RecipeDao itemDao = jpaRepository.save(RecipeDaoMapper.domainToDao(domain, libraryDao));
         return itemDao.daoToDomain();
-    }
-
-    @Override
-    public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
-        return null;
-    }
-
-    @Override
-    public ItemDomain getItem(long itemId) {
-        return null;
     }
 
     @Override
