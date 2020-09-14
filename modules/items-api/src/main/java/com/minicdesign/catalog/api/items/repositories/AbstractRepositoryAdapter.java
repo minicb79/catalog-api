@@ -21,12 +21,6 @@ import org.springframework.stereotype.Repository;
 public abstract class AbstractRepositoryAdapter<T extends ItemDao> implements RepositoryAdapter {
 
     @Override
-    public abstract ItemType appliesTo();
-
-    @Override
-    public abstract ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain);
-
-    @Override
     public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
 
         LibraryDao libraryDao = new LibraryDao();

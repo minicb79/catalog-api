@@ -26,5 +26,7 @@ public interface RepositoryAdapter {
 
     ItemDomain getItem(long itemId);
 
+    void updateItem(ItemDomain item);
+
     void deleteItem(long itemId);
 }

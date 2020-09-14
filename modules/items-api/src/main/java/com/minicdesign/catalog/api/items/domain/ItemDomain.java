@@ -24,6 +24,12 @@ public class ItemDomain {
     private Long libraryId;
 
     public static ItemDomain from(ItemDetailsRequest request, Long libraryId) {
+        ItemDomain domain = from(request);
+        domain.setLibraryId(libraryId);
+        return domain;
+    }
+
+    public static ItemDomain from(ItemDetailsRequest request) {
         ItemDomain domain = new ItemDomain();
         domain.setType(request.getType());
         domain.setTitle(request.getTitle());
@@ -33,7 +39,7 @@ public class ItemDomain {
         domain.setBarcode(request.getBarcode());
         domain.setPages(request.getPages());
         domain.setMeal(request.getMeal());
-        domain.setLibraryId(libraryId);
+
         return domain;
     }
 

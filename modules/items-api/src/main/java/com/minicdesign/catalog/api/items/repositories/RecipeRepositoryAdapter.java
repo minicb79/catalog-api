@@ -1,7 +1,11 @@
 package com.minicdesign.catalog.api.items.repositories;
 
+import java.util.Optional;
+
+import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
+import com.minicdesign.catalog.api.items.repositories.db.BookDao;
 import com.minicdesign.catalog.api.items.repositories.db.LibraryFilterJpaRepository;
 import com.minicdesign.catalog.api.items.repositories.db.RecipeDao;
 import com.minicdesign.catalog.api.items.repositories.db.RecipeJpaRepository;
@@ -33,6 +37,19 @@ public class RecipeRepositoryAdapter extends AbstractRepositoryAdapter<RecipeDao
 
         RecipeDao itemDao = jpaRepository.save(RecipeDaoMapper.domainToDao(domain, libraryDao));
         return itemDao.daoToDomain();
+    }
+
+    @Override
+    public void updateItem(ItemDomain item) {
+        Optional<RecipeDao> dao = jpaRepository.findById(item.getId());
+
+        if (dao.isEmpty()) {
+            throw new ItemNotFoundException(String.format("Item with id %d could not be found.", item.getId()));
+        }
+
+        LibraryDao libraryDao = dao.get().getLibrary();
+
+        jpaRepository.save(RecipeDaoMapper.domainToDao(item, libraryDao));
     }
 
     @Override
