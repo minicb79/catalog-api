@@ -7,11 +7,9 @@ import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.db.ItemDao;
-import com.minicdesign.catalog.api.items.repositories.db.ItemJpaRepository;
 import com.minicdesign.catalog.api.items.repositories.db.LibraryFilterJpaRepository;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
-import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,20 +17,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@RequiredArgsConstructor
-public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
-
-    private final ItemJpaRepository jpaRepository;
+public abstract class AbstractRepositoryAdapter<T extends ItemDao> implements RepositoryAdapter {
 
     @Override
-    public ItemType appliesTo() {
-        return ItemType.ALL;
-    }
+    public abstract ItemType appliesTo();
 
     @Override
-    public ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain) {
-        throw new UnsupportedOperationException("Can not create Item in ItemRepositoryAdapter. Consider using one of the more specific RepositoryAdapters.");
-    }
+    public abstract ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain);
 
     @Override
     public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
@@ -40,7 +31,7 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
         LibraryDao libraryDao = new LibraryDao();
         libraryDao.setId(libraryId);
 
-        Page<? extends ItemDao> daoPage = jpaRepository.findAllByLibrary(libraryDao, PageRequest.of(page, size));
+        Page<? extends ItemDao> daoPage = getJpaRepository().findAllByLibrary(libraryDao, PageRequest.of(page, size));
 
         return new PageImpl<>(
                 daoPage.getContent().stream()
@@ -53,7 +44,7 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
     @Override
     public ItemDomain getItem(long itemId) {
 
-        Optional<ItemDao> dao = jpaRepository.findById(itemId);
+        Optional<T> dao = getJpaRepository().findById(itemId);
 
         if (dao.isEmpty()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", itemId));
@@ -63,8 +54,5 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
 
     }
 
-    @Override
-    protected LibraryFilterJpaRepository<ItemDao, Long> getJpaRepository() {
-        return jpaRepository;
-    }
+    protected abstract LibraryFilterJpaRepository<T, Long> getJpaRepository();
 }

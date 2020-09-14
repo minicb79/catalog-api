@@ -4,7 +4,7 @@ import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.db.BookDao;
 import com.minicdesign.catalog.api.items.repositories.db.BookJpaRepository;
-import com.minicdesign.catalog.api.items.repositories.db.ItemDao;
+import com.minicdesign.catalog.api.items.repositories.db.LibraryFilterJpaRepository;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.LibraryDaoMapper;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class BookRepositoryAdapter implements RepositoryAdapter {
+public class BookRepositoryAdapter extends AbstractRepositoryAdapter<BookDao> {
 
     private final BookJpaRepository jpaRepository;
 
@@ -38,6 +38,16 @@ public class BookRepositoryAdapter implements RepositoryAdapter {
 
     @Override
     public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
-        return null;
+        throw new UnsupportedOperationException("Considering using ItemRepositoryAdapter.getItemForPage().");
+    }
+
+    @Override
+    public ItemDomain getItem(long itemId) {
+        throw new UnsupportedOperationException("Considering using ItemRepositoryAdapter.getItem().");
+    }
+
+    @Override
+    protected LibraryFilterJpaRepository<BookDao, Long> getJpaRepository() {
+        return jpaRepository;
     }
 }

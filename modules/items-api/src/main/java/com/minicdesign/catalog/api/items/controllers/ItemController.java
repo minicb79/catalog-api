@@ -9,6 +9,7 @@ import com.minicdesign.catalog.api.items.controllers.domain.response.ItemDetails
 import com.minicdesign.catalog.api.items.controllers.domain.response.PagedItemDetailsListResponse;
 import com.minicdesign.catalog.api.items.controllers.usecases.CreateItemUseCase;
 import com.minicdesign.catalog.api.items.controllers.usecases.GetItemListUseCase;
+import com.minicdesign.catalog.api.items.controllers.usecases.GetItemUseCase;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,7 @@ public class ItemController {
 
     private final CreateItemUseCase createItemService;
     private final GetItemListUseCase getItemListService;
+    private final GetItemUseCase getItemUseCase;
 
     @PostMapping("/libraries/{libraryId}/items")
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,5 +61,12 @@ public class ItemController {
                 itemDomainPage.getTotalPages(),
                 itemDomainPage.previousOrFirstPageable(),
                 itemDomainPage.nextOrLastPageable());
+    }
+
+    @GetMapping("/items/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody ItemDetailsResponse getItem(@PathVariable Long id) {
+        ItemDomain domain = getItemUseCase.getItem(id);
+        return ItemDetailsResponse.from(domain);
     }
 }

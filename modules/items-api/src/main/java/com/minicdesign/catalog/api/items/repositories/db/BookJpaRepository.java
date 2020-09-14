@@ -1,6 +1,7 @@
 package com.minicdesign.catalog.api.items.repositories.db;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface BookJpaRepository extends JpaRepository<BookDao, Long> {
+@Repository
+public interface BookJpaRepository extends LibraryFilterJpaRepository<BookDao, Long> {
 }

@@ -1,6 +1,7 @@
 package com.minicdesign.catalog.api.items.repositories.db;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RecipeJpaRepository extends JpaRepository<RecipeDao, Long> {
+@Repository
+public interface RecipeJpaRepository extends LibraryFilterJpaRepository<RecipeDao, Long> {
 }
