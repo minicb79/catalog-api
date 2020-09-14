@@ -25,4 +25,6 @@ public interface RepositoryAdapter {
     Page<ItemDomain> getItemsForPage(long libraryId, int page, int size);
 
     ItemDomain getItem(long itemId);
+
+    void deleteItem(long itemId);
 }

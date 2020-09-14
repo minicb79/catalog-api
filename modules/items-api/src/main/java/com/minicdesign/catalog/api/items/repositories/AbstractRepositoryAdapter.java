@@ -11,6 +11,7 @@ import com.minicdesign.catalog.api.items.repositories.db.LibraryFilterJpaReposit
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -52,6 +53,15 @@ public abstract class AbstractRepositoryAdapter<T extends ItemDao> implements Re
 
         return dao.get().daoToDomain();
 
+    }
+
+    @Override
+    public void deleteItem(long itemId) {
+        try {
+            getJpaRepository().deleteById(itemId);
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("Item with " + itemId + " not found, ignoring Exception.");
+        }
     }
 
     protected abstract LibraryFilterJpaRepository<T, Long> getJpaRepository();

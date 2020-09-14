@@ -8,12 +8,14 @@ import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsR
 import com.minicdesign.catalog.api.items.controllers.domain.response.ItemDetailsResponse;
 import com.minicdesign.catalog.api.items.controllers.domain.response.PagedItemDetailsListResponse;
 import com.minicdesign.catalog.api.items.controllers.usecases.CreateItemUseCase;
+import com.minicdesign.catalog.api.items.controllers.usecases.DeleteItemUseCase;
 import com.minicdesign.catalog.api.items.controllers.usecases.GetItemListUseCase;
 import com.minicdesign.catalog.api.items.controllers.usecases.GetItemUseCase;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,7 @@ public class ItemController {
     private final CreateItemUseCase createItemService;
     private final GetItemListUseCase getItemListService;
     private final GetItemUseCase getItemUseCase;
+    private final DeleteItemUseCase deleteItemUseCase;
 
     @PostMapping("/libraries/{libraryId}/items")
     @ResponseStatus(HttpStatus.CREATED)
@@ -65,8 +68,14 @@ public class ItemController {
 
     @GetMapping("/items/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody ItemDetailsResponse getItem(@PathVariable Long id) {
+    public @ResponseBody ItemDetailsResponse getItem(@PathVariable("id") Long id) {
         ItemDomain domain = getItemUseCase.getItem(id);
         return ItemDetailsResponse.from(domain);
+    }
+
+    @DeleteMapping("/items/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteItem(@PathVariable("id") Long id) {
+        deleteItemUseCase.deleteItem(id);
     }
 }

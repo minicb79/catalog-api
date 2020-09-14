@@ -1,7 +1,6 @@
 package com.minicdesign.catalog.api.integrationTests;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -163,5 +162,27 @@ public class ItemControllerIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorCode").value("NF-404"));
+    }
+
+    @Test
+    public void testDeleteItem() throws Exception {
+        mockMvc.perform(get("/items/2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(2L));
+
+        mockMvc.perform(delete("/items/2"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/items/2"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testDeleteItemWithInvalidId() throws Exception {
+        mockMvc.perform(get("/items/200"))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(delete("/items/200"))
+                .andExpect(status().isOk());
     }
 }
