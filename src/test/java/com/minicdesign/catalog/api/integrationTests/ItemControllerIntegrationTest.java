@@ -143,4 +143,25 @@ public class ItemControllerIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.itemList.length()").value(3));
     }
+
+    @Test
+    public void testGetItem() throws Exception {
+        mockMvc.perform(get("/items/4"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(4L))
+                .andExpect(jsonPath("$.name").doesNotExist())
+                .andExpect(jsonPath("$.title").value("Item 4"))
+                .andExpect(jsonPath("$.type").value("book"));
+    }
+
+    @Test
+    public void testGetItemWithInvalidId() throws Exception {
+        mockMvc.perform(get("/items/399"))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.errorCode").value("NF-404"));
+    }
 }
