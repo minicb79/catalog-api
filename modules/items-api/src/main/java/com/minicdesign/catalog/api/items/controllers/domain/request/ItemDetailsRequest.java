@@ -39,4 +39,7 @@ public class ItemDetailsRequest {
     private Integer pages;
 
     private String meal;
+
+    @Size(max = 255)
+    private String url;
 }

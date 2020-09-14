@@ -21,6 +21,7 @@ public class ItemDomain {
     private String barcode;
     private Integer pages;
     private String meal;
+    private String url;
     private Long libraryId;
 
     public static ItemDomain from(ItemDetailsRequest request, Long libraryId) {
@@ -39,6 +40,7 @@ public class ItemDomain {
         domain.setBarcode(request.getBarcode());
         domain.setPages(request.getPages());
         domain.setMeal(request.getMeal());
+        domain.setUrl(request.getUrl());
 
         return domain;
     }

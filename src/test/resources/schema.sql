@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `url`;
 DROP TABLE IF EXISTS `recipe`;
 DROP TABLE IF EXISTS `book`;
 DROP TABLE IF EXISTS `item`;
@@ -33,6 +34,12 @@ CREATE TABLE IF NOT EXISTS `recipe`
 (
     `id`   INTEGER PRIMARY KEY,
     `meal` VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS `url`
+(
+    `id`   INTEGER PRIMARY KEY,
+    `url` VARCHAR(255)
 );
 
 ALTER TABLE `item`
