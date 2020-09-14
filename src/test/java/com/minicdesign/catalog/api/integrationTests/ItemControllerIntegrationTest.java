@@ -206,4 +206,21 @@ public class ItemControllerIntegrationTest {
                 .andExpect(jsonPath("$.title").value("New Title"))
                 .andExpect(jsonPath("$.libraryId").exists());
     }
+
+    @Test
+    public void testUpdateWithInvalidId() throws Exception {
+        ItemDetailsRequest book = new ItemDetailsRequest();
+        book.setTitle("New Title");
+        book.setSubtitle("New Subtitle");
+        book.setAuthor("New Author");
+        book.setIsbn("New ISBN");
+        book.setBarcode("New Barcode");
+        book.setType(ItemType.BOOK);
+        book.setMeal("lunch");
+
+        mockMvc.perform(put("/items/1485")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)))
+                .andExpect(status().isNotFound());
+    }
 }
