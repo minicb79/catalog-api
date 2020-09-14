@@ -4,10 +4,12 @@ import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.db.BookDao;
 import com.minicdesign.catalog.api.items.repositories.db.BookJpaRepository;
+import com.minicdesign.catalog.api.items.repositories.db.ItemDao;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.LibraryDaoMapper;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,6 +33,11 @@ public class BookRepositoryAdapter implements RepositoryAdapter {
         LibraryDao libraryDao = LibraryDaoMapper.domainToDao(libraryDomain);
 
         BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(domain, libraryDao));
-        return BookDaoMapper.daoToDomain(itemDao);
+        return itemDao.daoToDomain();
+    }
+
+    @Override
+    public Page<ItemDomain> getItemsForPage(long libraryId, int page, int size) {
+        return null;
     }
 }

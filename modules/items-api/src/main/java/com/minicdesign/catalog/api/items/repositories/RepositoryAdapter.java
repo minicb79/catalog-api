@@ -4,6 +4,7 @@ import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.Page;
 
 public interface RepositoryAdapter {
 
@@ -18,4 +19,6 @@ public interface RepositoryAdapter {
      * @return The fully created ItemDomain, with id.
      */
     ItemDomain createItem(ItemDomain item, @Nullable LibraryDomain libraryDomain);
+
+    Page<ItemDomain> getItemsForPage(long libraryId, int page, int size);
 }

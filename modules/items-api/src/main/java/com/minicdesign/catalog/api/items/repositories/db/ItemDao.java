@@ -10,6 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.minicdesign.catalog.api.items.domain.ItemDomain;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
 import lombok.Data;
 
@@ -35,5 +36,7 @@ public abstract class ItemDao {
     @ManyToOne
     @JoinColumn(name = "library_id")
     protected LibraryDao library;
+
+    public abstract ItemDomain daoToDomain();
 
 }

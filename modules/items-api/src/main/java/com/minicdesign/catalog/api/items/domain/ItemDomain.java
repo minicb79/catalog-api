@@ -1,6 +1,7 @@
 package com.minicdesign.catalog.api.items.domain;
 
 import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsRequest;
+import com.minicdesign.catalog.api.items.repositories.db.ItemDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,5 +35,9 @@ public class ItemDomain {
         domain.setMeal(request.getMeal());
         domain.setLibraryId(libraryId);
         return domain;
+    }
+
+    public static ItemDomain from(ItemDao dao) {
+        return dao.daoToDomain();
     }
 }

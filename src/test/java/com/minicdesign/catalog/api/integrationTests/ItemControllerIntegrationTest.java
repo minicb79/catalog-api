@@ -1,6 +1,7 @@
 package com.minicdesign.catalog.api.integrationTests;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -132,5 +133,14 @@ public class ItemControllerIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorCode").value("NF-404"));
+    }
+
+    @Test
+    public void testGetPageOfItems() throws Exception {
+        mockMvc.perform(get("/libraries/3/items"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.itemList.length()").value(3));
     }
 }
