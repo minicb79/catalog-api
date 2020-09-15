@@ -5,12 +5,9 @@ import java.util.stream.Collectors;
 
 import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
 import com.minicdesign.catalog.api.items.domain.ItemDomain;
-import com.minicdesign.catalog.api.items.domain.ItemType;
 import com.minicdesign.catalog.api.items.repositories.db.ItemDao;
 import com.minicdesign.catalog.api.items.repositories.db.LibraryFilterJpaRepository;
-import com.minicdesign.catalog.api.libraries.domain.LibraryDomain;
 import com.minicdesign.catalog.api.libraries.repositories.db.LibraryDao;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
