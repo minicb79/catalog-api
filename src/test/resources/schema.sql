@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `magazine`;
 DROP TABLE IF EXISTS `url`;
 DROP TABLE IF EXISTS `recipe`;
 DROP TABLE IF EXISTS `book`;
@@ -17,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `item`
     `title`      VARCHAR(60) NOT NULL,
     `subtitle`   VARCHAR(120),
     `summary`    VARCHAR(1024),
---     `parent_item_id` INTEGER NULL,
+--      `parent_item_id` INTEGER NULL,
     `library_id` INTEGER     NOT NULL
 );
 
@@ -27,7 +28,8 @@ CREATE TABLE IF NOT EXISTS `book`
     `author`  VARCHAR(60),
     `isbn`    VARCHAR(20),
     `barcode` VARCHAR(20),
-    `pages`   integer
+    `pages`   INTEGER,
+    `year`    INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS `recipe`
@@ -38,8 +40,29 @@ CREATE TABLE IF NOT EXISTS `recipe`
 
 CREATE TABLE IF NOT EXISTS `url`
 (
-    `id`   INTEGER PRIMARY KEY,
+    `id`  INTEGER PRIMARY KEY,
     `url` VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS `magazine`
+(
+    `id`      INTEGER PRIMARY KEY,
+    `edition` VARCHAR(20),
+    `year`    INTEGER,
+    `month`   INTEGER,
+    `week`    INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS `boardgame`
+(
+    `id` INTEGER PRIMARY KEY,
+    `min_players` INTEGER,
+    `max_players` INTEGER,
+    `min_time` INTEGER,
+    `max_time` INTEGER,
+    `min_age` INTEGER,
+    `bgg_url` VARCHAR(512),
+    `expansion` BOOL
 );
 
 ALTER TABLE `item`

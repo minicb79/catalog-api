@@ -43,7 +43,7 @@ public class LibraryRepositoryAdapter {
     public LibraryDomain getLibrary(long id) {
         Optional<LibraryDao> dao = jpaRepository.findById(id);
 
-        if (dao.isEmpty()) {
+        if (!dao.isPresent()) {
             throw new ItemNotFoundException(String.format("Library with id %d could not be found.", id));
         }
 

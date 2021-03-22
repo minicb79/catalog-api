@@ -38,7 +38,7 @@ public abstract class AbstractRepositoryAdapter<T extends ItemDao> implements Re
 
         Optional<T> dao = getJpaRepository().findById(itemId);
 
-        if (dao.isEmpty()) {
+        if (!dao.isPresent()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", itemId));
         }
 

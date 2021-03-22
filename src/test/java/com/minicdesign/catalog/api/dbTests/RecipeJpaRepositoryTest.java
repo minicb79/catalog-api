@@ -26,7 +26,6 @@ public class RecipeJpaRepositoryTest {
     public void testDbAccess() {
         List<RecipeDao> itemList = repo.findAll();
 
-
         assertEquals(1, itemList.size());
         RecipeDao dao = itemList.get(0);
         assertEquals("Item 6", dao.getTitle());

@@ -48,7 +48,7 @@ public class UrlRepositoryAdapter extends AbstractRepositoryAdapter<UrlDao> {
     public void updateItem(ItemDomain item) {
         Optional<UrlDao> dao = jpaRepository.findById(item.getId());
 
-        if (dao.isEmpty()) {
+        if (!dao.isPresent()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", item.getId()));
         }
 
