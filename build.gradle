@@ -21,7 +21,7 @@ allprojects {
 
     group = 'com.minicdesign.catalog'
     version = "$apiVersion"
-    sourceCompatibility = '1.8'
+    sourceCompatibility = '11'
 
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
