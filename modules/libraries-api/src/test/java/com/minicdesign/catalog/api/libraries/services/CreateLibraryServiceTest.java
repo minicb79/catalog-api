@@ -29,9 +29,7 @@ public class CreateLibraryServiceTest {
 
     @Test
     void givenNullLibrary_whenCreateLibrary_thenExceptionThrown() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            service.createLibrary(null);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> service.createLibrary(null));
     }
 
     @Test
