@@ -55,9 +55,7 @@ public class LibraryRepositoryAdapterTest {
     @Test
     void givenNullDomain_whenCreateLibrary_thenIllegalArgumentExceptionThrown() {
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            repository.createLibrary(null);
-        });
+        assertThrows(IllegalArgumentException.class, () -> repository.createLibrary(null));
     }
 
     @Test
@@ -81,9 +79,46 @@ public class LibraryRepositoryAdapterTest {
     @Test
     void givenUnknownLibraryId_whenGetLibrary_thenItemNotFoundExceptionThrown() {
 
-        assertThrows(ItemNotFoundException.class, () -> {
-            repository.getLibrary(100L);
-        });
+        assertThrows(ItemNotFoundException.class, () -> repository.getLibrary(100L));
+    }
+
+    @Test
+    void givenValidLibrary_whenUpdateLibrary_thenUpdatedLibraryReturned() {
+        LibraryDomain requestedDomain = new LibraryDomain();
+        requestedDomain.setId(1L);
+        requestedDomain.setName("Library Name");
+        requestedDomain.setDescription("Library Description");
+
+        LibraryDao libraryDao = new LibraryDao();
+        libraryDao.setId(1L);
+        libraryDao.setName("Library Name");
+        libraryDao.setDescription("Library Description");
+
+        when(jpaRepository.countById(anyLong())).thenReturn(1);
+        when(jpaRepository.save(any())).thenReturn(libraryDao);
+
+        LibraryDomain response = repository.updateLibrary(requestedDomain);
+
+        assertNotNull(response);
+        assertEquals(1L, response.getId());
+        assertEquals("Library Name", response.getName());
+        assertEquals("Library Description", response.getDescription());
+    }
+
+    @Test
+    void givenInvalidLibraryWithMissingId_whenUpdateLibrary_thenItemNotFoundExceptionThrown() {
+
+        LibraryDomain invalidLibrary = new LibraryDomain();
+        invalidLibrary.setName("Library Name");
+        invalidLibrary.setDescription("A valid description for invalid library - missing ID");
+
+        assertThrows(ItemNotFoundException.class, () -> repository.updateLibrary(invalidLibrary));
+    }
+
+    @Test
+    void givenNullLibrary_whenUpdateLibrary_thenIllegalArgumentExceptionThrown() {
+
+        assertThrows(IllegalArgumentException.class, () -> repository.updateLibrary(null));
     }
 
 }
