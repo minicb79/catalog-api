@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.minicdesign.catalog.api.exceptions.ItemNotFoundException;
@@ -16,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
 public class LibraryRepositoryAdapterTest {
@@ -56,6 +60,40 @@ public class LibraryRepositoryAdapterTest {
     void givenNullDomain_whenCreateLibrary_thenIllegalArgumentExceptionThrown() {
 
         assertThrows(IllegalArgumentException.class, () -> repository.createLibrary(null));
+    }
+
+    @Test
+    void givenValidLibrary_whenGetCount_thenCountReturned() {
+        when(jpaRepository.count()).thenReturn(2L);
+
+        Long count = repository.getCount();
+
+        assertEquals(2, count);
+    }
+
+    @Test
+    void givenValidLibrary_whenGetLibrariesForPage_thenReturnPage() {
+        LibraryDao library1 = new LibraryDao();
+        library1.setId(3L);
+        library1.setName("Library 3 Name");
+        library1.setDescription("Library 3 Description");
+
+        LibraryDao library2 = new LibraryDao();
+        library2.setId(4L);
+        library2.setName("Library 4 Name");
+        library2.setDescription("Library 4 Description");
+
+        when(jpaRepository.findAll(any(PageRequest.class))).thenReturn(new PageImpl<>(Arrays.asList(library1, library2)));
+
+        Page<LibraryDomain> page = repository.getLibrariesForPage(2, 2);
+
+        assertEquals(2, page.getSize());
+
+        LibraryDomain domain = page.getContent().get(0);
+        assertNotNull(domain);
+        assertEquals(3L, domain.getId());
+        assertEquals("Library 3 Name", domain.getName());
+        assertEquals("Library 3 Description", domain.getDescription());
     }
 
     @Test
