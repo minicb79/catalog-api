@@ -2,8 +2,7 @@ package com.minicdesign.catalog.api.libraries.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -93,6 +92,39 @@ public class LibraryControllerTest {
         assertEquals(15, libraryList.getCount());
         assertEquals(3, libraryList.getPageCount());
         assertEquals(0, libraryList.getPage());
+    }
+
+    @Test
+    public void givenValidRequest_whenGetLibrary_thenLibraryReturned() {
+
+        LibraryDomain libraryDomain = new LibraryDomain(1L, "Library 1", "Description 1");
+
+        when(getLibraryUseCase.getLibrary(anyLong())).thenReturn(libraryDomain);
+
+        LibraryDetailsResponse response = controller.getLibrary(1L);
+
+        assertNotNull(response);
+        assertEquals(1L, response.getId());
+        assertEquals("Library 1", response.getName());
+        assertEquals("Description 1", response.getDescription());
+    }
+
+    @Test
+    public void givenValidRequest_whenUpdateLibrary_thenUpdatedLibraryReturned() {
+        LibraryDetailsRequest libraryUpdateRequest = new LibraryDetailsRequest();
+        libraryUpdateRequest.setName("Library 1");
+        libraryUpdateRequest.setDescription("Updated Description 1");
+
+        LibraryDomain updatedLibraryDomain = new LibraryDomain(1L, "Library 1", "Updated Description 1");
+
+        when(updateLibraryUseCase.updateLibrary(any())).thenReturn(updatedLibraryDomain);
+
+        LibraryDetailsResponse response = controller.updateLibrary(1L, libraryUpdateRequest);
+
+        assertNotNull(response);
+        assertEquals(1L, response.getId());
+        assertEquals("Library 1", response.getName());
+        assertEquals("Updated Description 1", response.getDescription());
     }
 
 }
