@@ -27,6 +27,7 @@ public class ItemDetailsResponse {
     private String barcode;
     private Integer pages;
     private String meal;
+    private String url;
     private Long libraryId;
 
     public static ItemDetailsResponse from(ItemDomain domain) {
@@ -41,6 +42,7 @@ public class ItemDetailsResponse {
                 domain.getBarcode(),
                 domain.getPages(),
                 domain.getMeal(),
+                domain.getUrl(),
                 domain.getLibraryId());
     }
 }

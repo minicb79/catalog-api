@@ -47,4 +47,10 @@ public class LibraryJpaRepositoryTest {
         assertEquals(1, count);
     }
 
+    @Test
+    public void testLibraryCount() {
+        long count = repo.count();
+        assertEquals(14, count);
+    }
+
 }

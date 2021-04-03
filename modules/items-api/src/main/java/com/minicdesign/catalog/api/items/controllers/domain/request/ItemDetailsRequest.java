@@ -5,12 +5,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.minicdesign.catalog.api.items.controllers.domain.validator.ItemRequestConstraint;
 import com.minicdesign.catalog.api.items.domain.ItemType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@ItemRequestConstraint
 public class ItemDetailsRequest {
 
     @NotNull(message = "must be present [boardgame, book, magazine, recipe, url]")
