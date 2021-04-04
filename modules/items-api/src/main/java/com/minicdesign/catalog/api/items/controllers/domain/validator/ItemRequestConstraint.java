@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ItemRequestConstraint {
 
-  String message() default "Invalid ItemType. Must be one of BOARD_GAME, BOOK, MAGAZINE, RECIPE, or URL.";
+  String message() default "Invalid \"type\". Must be one of \"boardgame\", \"book\", \"magazine\", \"recipe\", or \"url\".";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 
