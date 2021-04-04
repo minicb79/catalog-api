@@ -64,7 +64,7 @@ public class ItemIntegrationTest {
         .andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.errors").isArray())
         .andExpect(jsonPath("$.errors", hasSize(2)))
-        .andExpect(jsonPath("$.errors", hasItem("Invalid ItemType. Must be one of BOARD_GAME, BOOK, MAGAZINE, RECIPE, or URL.")));
+        .andExpect(jsonPath("$.errors", hasItem("Invalid \"type\". Must be one of \"boardgame\", \"book\", \"magazine\", \"recipe\", or \"url\".")));
   }
 
   @Test
@@ -81,7 +81,7 @@ public class ItemIntegrationTest {
         .andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.errors").isArray())
         .andExpect(jsonPath("$.errors", hasSize(2)))
-        .andExpect(jsonPath("$.errors", hasItem("Invalid ItemType. Must be one of BOARD_GAME, BOOK, MAGAZINE, RECIPE, or URL.")));
+        .andExpect(jsonPath("$.errors", hasItem("Invalid \"type\". Must be one of \"boardgame\", \"book\", \"magazine\", \"recipe\", or \"url\".")));
 
     verify(mockCreateItemUseCase, times(0)).createItem(any(ItemDomain.class));
   }

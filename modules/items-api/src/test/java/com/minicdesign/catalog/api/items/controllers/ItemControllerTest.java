@@ -1,12 +1,8 @@
 package com.minicdesign.catalog.api.items.controllers;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsRequest;
 import com.minicdesign.catalog.api.items.controllers.domain.response.ItemDetailsResponse;
@@ -18,10 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @ExtendWith(MockitoExtension.class)
 public class ItemControllerTest {
@@ -40,7 +35,7 @@ public class ItemControllerTest {
   }
 
   @Test
-  public void givenValidRequest_whenCreateItem_theCreatedResponseReturned() {
+  public void givenValidRequest_whenCreateItem_thenCreatedResponseReturned() {
 
     ItemDetailsRequest request = new ItemDetailsRequest();
     request.setType(ItemType.BOOK);
@@ -67,6 +62,5 @@ public class ItemControllerTest {
     assertEquals("ALL", response.getMeal());
     assertEquals("www.recipes.com", response.getUrl());
   }
-
 
 }

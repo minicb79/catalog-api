@@ -33,7 +33,7 @@ public class ItemDetailsResponse {
     public static ItemDetailsResponse from(ItemDomain domain) {
         return new ItemDetailsResponse(
                 domain.getId(),
-                domain.getType() == ItemType.ALL ? null : domain.getType(),
+                domain.getType() == null ? null : domain.getType(),
                 domain.getTitle(),
                 domain.getSubtitle(),
                 domain.getSummary(),
