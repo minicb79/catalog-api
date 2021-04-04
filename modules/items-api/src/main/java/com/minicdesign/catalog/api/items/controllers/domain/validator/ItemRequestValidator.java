@@ -8,6 +8,10 @@ import com.minicdesign.catalog.api.items.controllers.domain.request.ItemDetailsR
 public class ItemRequestValidator implements
     ConstraintValidator<ItemRequestConstraint, Object> {
 
+  private static final String MISSING_AUTHOR_MSG = "Author must not be null or blank.";
+  private static final String MISSING_TITLE_MSG = "Title must not be null or blank.";
+  private static final String MISSING_URL_MSG = "URL must not be null or blank.";
+
   private String message;
 
   @Override
@@ -46,29 +50,50 @@ public class ItemRequestValidator implements
 
   private boolean validateBook(ItemDetailsRequest request) {
     if (request.getAuthor() == null || request.getAuthor().isBlank()) {
-      message = "Author must not be null or blank.";
+      message = MISSING_AUTHOR_MSG;
       return false;
     }
     if (request.getTitle() == null || request.getTitle().isBlank()) {
-      message = "Title must not be null or blank.";
+      message = MISSING_TITLE_MSG;
       return false;
     }
     return true;
   }
 
   private boolean validateMagazine(ItemDetailsRequest request) {
-    return false;
+    if (request.getTitle() == null || request.getTitle().isBlank()) {
+      message = MISSING_TITLE_MSG;
+      return false;
+    }
+    return true;
   }
 
   private boolean validateBoardGame(ItemDetailsRequest request) {
-    return false;
+    if (request.getTitle() == null || request.getTitle().isBlank()) {
+      message = MISSING_TITLE_MSG;
+      return false;
+    }
+    return true;
   }
 
   private boolean validateRecipe(ItemDetailsRequest request) {
-    return false;
+    if (request.getTitle() == null || request.getTitle().isBlank()) {
+      message = MISSING_TITLE_MSG;
+      return false;
+    }
+    return true;
   }
 
   private boolean validateUrl(ItemDetailsRequest request) {
-    return false;
+    if (request.getUrl() == null || request.getUrl().isBlank()) {
+      message = MISSING_URL_MSG;
+      return false;
+    }
+
+    if (request.getTitle() == null || request.getTitle().isBlank()) {
+      message = MISSING_TITLE_MSG;
+      return false;
+    }
+    return true;
   }
 }

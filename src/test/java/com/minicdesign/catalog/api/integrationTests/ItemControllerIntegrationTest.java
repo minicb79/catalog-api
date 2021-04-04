@@ -113,7 +113,7 @@ public class ItemControllerIntegrationTest {
                 .andExpect(jsonPath("$.validationErrors").exists())
                 .andExpect(jsonPath("$.validationErrors").isMap())
                 .andExpect(jsonPath("$.validationErrors").isNotEmpty())
-                .andExpect(jsonPath("$.validationErrors.length()").value(5));
+                .andExpect(jsonPath("$.validationErrors.length()").value(6));
     }
 
     @Test
