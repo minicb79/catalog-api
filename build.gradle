@@ -13,7 +13,6 @@ plugins {
 }
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
@@ -28,7 +27,6 @@ allprojects {
     apply plugin: 'java-library'
 
     repositories {
-        jcenter()
         mavenCentral()
     }
 
@@ -58,6 +56,12 @@ subprojects {
             extendsFrom developmentOnly
         }
     }
+}
+
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+    // Combine all 'test' task results into a single HTML report
+    reportOn allprojects.collect { it.tasks.withType(Test) }
 }
 
 dependencies {
