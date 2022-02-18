@@ -1,7 +1,7 @@
 buildscript {
     ext {
         apiVersion = '0.0.1-SNAPSHOT'
-        lombokVersion = '1.18.12'
+        lombokVersion = '1.18.22'
         springVersion = '2.3.3.RELEASE'
     }
 }
