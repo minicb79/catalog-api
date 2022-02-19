@@ -39,16 +39,17 @@ public class BookRepositoryAdapter extends AbstractRepositoryAdapter<BookDao> {
     }
 
     @Override
-    public void updateItem(ItemDomain item) {
+    public ItemDomain updateItem(ItemDomain item) {
         Optional<BookDao> dao = jpaRepository.findById(item.getId());
 
-        if (!dao.isPresent()) {
+        if (dao.isEmpty()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", item.getId()));
         }
 
         LibraryDao libraryDao = dao.get().getLibrary();
 
-        jpaRepository.save(BookDaoMapper.domainToDao(item, libraryDao));
+        BookDao itemDao = jpaRepository.save(BookDaoMapper.domainToDao(item, libraryDao));
+        return itemDao.daoToDomain();
     }
 
     @Override

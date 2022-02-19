@@ -81,10 +81,10 @@ public class ItemController {
 
   @PutMapping("/items/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public void updateItem(@PathVariable("id") Long id, @RequestBody @Valid ItemDetailsRequest request) {
+  public ItemDetailsResponse updateItem(@PathVariable("id") Long id, @RequestBody @Valid ItemDetailsRequest request) {
     ItemDomain domain = ItemDomain.from(request);
     domain.setId(id);
-    updateItemUseCase.updateItem(domain);
+    return ItemDetailsResponse.from(updateItemUseCase.updateItem(domain));
   }
 
   @DeleteMapping("/items/{id}")

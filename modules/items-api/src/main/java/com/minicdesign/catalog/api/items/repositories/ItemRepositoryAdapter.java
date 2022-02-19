@@ -55,7 +55,7 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
 
         Optional<ItemDao> dao = jpaRepository.findById(itemId);
 
-        if (!dao.isPresent()) {
+        if (dao.isEmpty()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", itemId));
         }
 
@@ -64,7 +64,7 @@ public class ItemRepositoryAdapter extends AbstractRepositoryAdapter<ItemDao> {
     }
 
     @Override
-    public void updateItem(ItemDomain item) {
+    public ItemDomain updateItem(ItemDomain item) {
         throw new UnsupportedOperationException("Can not update Item in ItemRepositoryAdapter. Consider using one of the more specific RepositoryAdapters.");
     }
 

@@ -49,7 +49,7 @@ public class ModifyItemService implements CreateItemUseCase, UpdateItemUseCase {
     }
 
     @Override
-    public void updateItem(ItemDomain item) {
+    public ItemDomain updateItem(ItemDomain item) {
 
         if (item == null) {
             throw new IllegalArgumentException("ItemDomain must not be null when creating an Item.");
@@ -57,6 +57,6 @@ public class ModifyItemService implements CreateItemUseCase, UpdateItemUseCase {
 
         RepositoryAdapter repository = repositoryAdapterMap.get(item.getType());;
 
-        repository.updateItem(item);
+        return repository.updateItem(item);
     }
 }

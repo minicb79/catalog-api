@@ -45,15 +45,16 @@ public class UrlRepositoryAdapter extends AbstractRepositoryAdapter<UrlDao> {
     }
 
     @Override
-    public void updateItem(ItemDomain item) {
+    public ItemDomain updateItem(ItemDomain item) {
         Optional<UrlDao> dao = jpaRepository.findById(item.getId());
 
-        if (!dao.isPresent()) {
+        if (dao.isEmpty()) {
             throw new ItemNotFoundException(String.format("Item with id %d could not be found.", item.getId()));
         }
 
         LibraryDao libraryDao = dao.get().getLibrary();
 
-        jpaRepository.save(UrlDaoMapper.domainToDao(item, libraryDao));
+        UrlDao itemDao = jpaRepository.save(UrlDaoMapper.domainToDao(item, libraryDao));
+        return itemDao.daoToDomain();
     }
 }
